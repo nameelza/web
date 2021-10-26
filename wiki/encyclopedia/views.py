@@ -21,3 +21,6 @@ def entry(request, title):
         return render(request, "encyclopedia/error.html", {
             "error": "Entry not found"
         })
+
+
+
