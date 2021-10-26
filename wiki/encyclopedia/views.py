@@ -1,3 +1,4 @@
+from re import S
 from django.shortcuts import render
 
 from . import util
@@ -22,5 +23,14 @@ def entry(request, title):
             "error": "Entry not found"
         })
 
+def search(request):
+    query = request.GET.get("q")
+    entries = util.list_entries()
+    if query in entries:
+        return entry(request,query)
+    else:
+        return render(request, "encyclopedia/error.html", {
+            "error": "Entry not found"
+        })
 
 
