@@ -24,13 +24,25 @@ def entry(request, title):
         })
 
 def search(request):
-    query = request.GET.get("q")
+    query = request.GET.get("q").lower()
     entries = util.list_entries()
-    if query in entries:
-        return entry(request,query)
-    else:
+    results = []
+    for ent in entries:
+        if query == ent.lower():
+            return entry(request, query)
+        elif query in ent.lower():
+            results.append(ent)
+    if len(results) == 0:
         return render(request, "encyclopedia/error.html", {
-            "error": "Entry not found"
+            "error": "No results found"
         })
+    else:
+        return render(request, "encyclopedia/index.html", {
+            "entries": results,
+            "message": f"Search results for '{query}'"
+        })
+            
+
+    
 
 

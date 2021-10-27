@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+    {% if message %}
+        <h1>{{message}}</h1>
+    {% else %}
+        <h1>All Pages</h1>
+    {% endif %}
 
     <ul>
         {% for entry in entries %}
