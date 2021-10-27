@@ -42,6 +42,9 @@ def search(request):
             "message": f"Search results for '{query}'"
         })
             
+def new(request):
+    return render(request, "encyclopedia/newpage.html")
+
 
     
 
