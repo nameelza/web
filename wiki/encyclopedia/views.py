@@ -43,7 +43,37 @@ def search(request):
         })
             
 def new(request):
-    return render(request, "encyclopedia/newpage.html")
+    if request.method =="POST":
+
+        title = request.POST.get("title").capitalize()
+        content = request.POST.get("content")
+        wholeContent = f"# {title}\n\n{content}"
+        
+        if title in util.list_entries():
+            return render(request, "encyclopedia/error.html", {
+                "error": "Entry already exists"
+            })
+        else:
+            util.save_entry(title, wholeContent)
+            return entry(request, title)
+
+    elif request.method == "GET":
+        return render(request, "encyclopedia/newpage.html")
+
+    else:
+        return render(request, "encyclopedia/error.html", {
+            "error": "Invalid request"
+        })
+
+def edit(request):
+    if request.method =="POST":
+        pass
+    elif request.method == "GET":
+        return render(request,  "encyclopedia/editpage.html")
+    else:
+        return render(request, "encyclopedia/error.html", {
+            "error": "Invalid request"
+        })
 
 
     
