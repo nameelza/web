@@ -4,57 +4,42 @@ from django.shortcuts import render
 from . import util
 
 import markdown2
-from random import random
+import secrets
 
 def index(request):
-    if request.method == "GET":
-        return render(request, "encyclopedia/index.html", {
-            "entries": util.list_entries()
-        })
-    else:
-        return render(request, "encyclopedia/error.html", {
-            "error": "Invalid request"
-        })
+    return render(request, "encyclopedia/index.html", {
+        "entries": util.list_entries()
+    })
 
 def entry(request, title):
-    if request.method == "GET":
-        entry = util.get_entry(title)
-        if entry:
-            return render(request, "encyclopedia/entry.html", {
-                "title": title,
-                "entry": markdown2.markdown(entry)
-            })
-        else:
-            return render(request, "encyclopedia/error.html", {
-                "error": "Entry not found"
-            })
+    entry = util.get_entry(title)
+    if entry:
+        return render(request, "encyclopedia/entry.html", {
+            "title": title,
+            "entry": markdown2.markdown(entry)
+        })
     else:
         return render(request, "encyclopedia/error.html", {
-            "error": "Invalid request"
+            "error": "Entry not found"
         })
 
 def search(request):
-    if request.method == "GET":
-        query = request.GET.get("q").lower()
-        entries = util.list_entries()
-        results = []
-        for ent in entries:
-            if query == ent.lower():
-                return entry(request, query)
-            elif query in ent.lower():
-                results.append(ent)
-        if len(results) == 0:
-            return render(request, "encyclopedia/error.html", {
-                "error": "No results found"
-            })
-        else:
-            return render(request, "encyclopedia/index.html", {
-                "entries": results,
-                "message": f"Search results for '{query}'"
-            })
-    else:
+    query = request.GET.get("q").lower()
+    entries = util.list_entries()
+    results = []
+    for ent in entries:
+        if query == ent.lower():
+            return entry(request, query)
+        elif query in ent.lower():
+            results.append(ent)
+    if len(results) == 0:
         return render(request, "encyclopedia/error.html", {
-            "error": "Invalid request"
+            "error": "No results found"
+        })
+    else:
+        return render(request, "encyclopedia/index.html", {
+            "entries": results,
+            "message": f"Search results for '{query}'"
         })
 
 def new(request):
@@ -91,12 +76,10 @@ def edit(request, title):
             "title": title,
             "content": content
         })
-    else:
-        return render(request, "encyclopedia/error.html", {
-            "error": "Invalid request"
-        })
 
-
+def random(request):
+    entries = util.list_entries()
+    return entry(request, secrets.choice(entries))
     
 
 
