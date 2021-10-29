@@ -1,0 +1,7 @@
+# Rosh hashanah
+
+Rosh Hashanah (Hebrew: רֹאשׁ הַשָּׁנָה‎), literally meaning "head [of] the year", is the Jewish New Year. The biblical name for this holiday is Yom Teruah (יוֹם תְּרוּעָה‎), literally "day of shouting or blasting." It is the first of the Jewish High Holy Days (יָמִים נוֹרָאִים‎ Yamim Nora'im. "Days of Awe"), as specified by Leviticus 23:23–25, that occur in the late summer/early autumn of the Northern Hemisphere.
+
+Rosh Hashanah is a two-day observance and celebration that begins on the first day of Tishrei, which is the seventh month of the ecclesiastical year. In contrast to the ecclesiastical lunar new year on the first day of the first month Nisan, the spring Passover month which marks Israel's exodus from Egypt, Rosh Hashanah marks the beginning of the civil year, according to the teachings of Judaism, and is the traditional anniversary of the creation of Adam and Eve, the first man and woman according to the Hebrew Bible as well as the initiation of humanity's role in God's world.
+
+Rosh Hashanah customs include sounding the shofar (a cleaned-out ram's horn), as prescribed in the Torah, following the prescription of the Hebrew Bible to "raise a noise" on Yom Teruah. Its rabbinical customs include attending synagogue services and reciting special liturgy about teshuva, as well as enjoying festive meals. Eating symbolic foods is now a tradition, such as apples dipped in honey, hoping to evoke a sweet new year.

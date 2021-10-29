@@ -1,0 +1,7 @@
+# Hanukkah
+
+Hanukkah is a Jewish festival commemorating the recovery of Jerusalem and subsequent rededication of the Second Temple at the beginning of the Maccabean Revolt against the Seleucid Empire in the 2nd century BCE. It is also known as the Festival of Lights.
+
+Hanukkah is observed for eight nights and days, starting on the 25th day of Kislev according to the Hebrew calendar, which may occur at any time from late November to late December in the Gregorian calendar. The festival is observed by lighting the candles of a candelabrum with nine branches, called a menorah (or hanukkiah). One branch is typically placed above or below the others and its candle is used to light the other eight candles. This unique candle is called the shamash (Hebrew: שַׁמָּשׁ‎, "attendant"). Each night, one additional candle is lit by the shamash until all eight candles are lit together on the final night of the festival. Other Hanukkah festivities include singing Hanukkah songs, playing the game of dreidel, and eating oil-based foods, such as latkes and sufganiyot, and dairy foods. Since the 1970s, the worldwide Chabad Hasidic movement has initiated public menorah lightings in open public places in many countries.
+
+Although a relatively minor holiday in strictly religious terms, Hanukkah has attained major cultural significance in North America and elsewhere, especially among secular Jews, due to its occurring around the same time as Christmas.
