@@ -5,6 +5,7 @@
     <ul>
         <li>From: {{flight.origin}}</li>
         <li>To: {{flight.destination}}</li>
-        <li>Duration: {{flight.duration}}</li>
+        <li>Duration: {{flight.duration}} minutes</li>
     </ul>
+    <a href="{% url 'index' %}">Back to all flights</a>
 {% endblock %}
