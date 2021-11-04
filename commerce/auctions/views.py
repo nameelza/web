@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
+from django.db.models.aggregates import Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django import forms
+from django.contrib.auth.decorators import login_required
 
 from .models import User, Listings, Bids
 
@@ -11,10 +13,26 @@ from .models import User, Listings, Bids
 def index(request):
     return render(request, "auctions/index.html")
 
+@login_required
 def create(request):
     if request.method == "POST":
-        pass
+        title = request.POST['title']
+        description = request.POST['description']
+        category = request.POST['category']
+        price = request.POST['price']
+        image = request.POST['image']
+        user = request.user
+
+        new_listing = Listings(title=title, description=description, category=category, image=image, user=user)
+        new_listing.save()
+
+        new_bid = Bids(bid=price, listing=new_listing, user=user, count=1)
+        new_bid.save()
+
+        return HttpResponseRedirect(reverse("create"))
+
     else:
+        
         categories = Listings.CATEGORY_CHOICES
         return render(request, "auctions/create.html", {
             "categories": categories

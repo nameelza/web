@@ -29,7 +29,7 @@ class Bids(models.Model):
     listing = models.ForeignKey(Listings, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username + " " + self.bid
+        return self.user.username + " " + self.listing.title
 
 
 
