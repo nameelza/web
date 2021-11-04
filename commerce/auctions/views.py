@@ -11,7 +11,7 @@ from .models import User, Listings, Bids
 
 
 def index(request):
-    listings = Listings.objects.all()
+    listings = Listings.objects.exclude(user=request.user).order_by('-created_at')
     return render(request, "auctions/index.html", {
         "listings": listings
     })
