@@ -1,10 +1,12 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+    <h2>My Listings</h2>
     {% for listing in listings %}
         {{listing.title}}
         ${{listing.starting_bid}}
-        Created {{listing.created_at}}<br>
+        Created {{listing.created_at}}
     {% endfor %}
+    <a href="{% url 'myListings' %}">Edit</a>
+
 {% endblock %}

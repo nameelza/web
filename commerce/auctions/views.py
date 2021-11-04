@@ -11,7 +11,17 @@ from .models import User, Listings, Bids
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    listings = Listings.objects.all()
+    return render(request, "auctions/index.html", {
+        "listings": listings
+    })
+
+@login_required
+def myListings(request):
+    listings = Listings.objects.filter(user=request.user)
+    return render(request, "auctions/myListings.html", {
+        "listings": listings
+    })
 
 @login_required
 def create(request):
@@ -23,14 +33,10 @@ def create(request):
         image = request.POST['image']
         user = request.user
 
-        new_listing = Listings(title=title, description=description, category=category, image=image, user=user)
+        new_listing = Listings(title=title, description=description, category=category, image=image, starting_bid=price, user=user)
         new_listing.save()
 
-        new_bid = Bids(bid=price, listing=new_listing, user=user, count=1)
-        new_bid.save()
-
-        return HttpResponseRedirect(reverse("create"))
-
+        return HttpResponseRedirect(reverse("index"))
     else:
         
         categories = Listings.CATEGORY_CHOICES
