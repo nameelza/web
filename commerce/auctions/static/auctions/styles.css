@@ -14,3 +14,7 @@ body {
 .listing img {
     max-height: 300px;
 }
+
+.listingInfo {
+    margin-left: 20px;
+}
