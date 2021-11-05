@@ -11,7 +11,12 @@ from .models import User, Listings, Bids
 
 
 def index(request):
-    listings = Listings.objects.exclude(user=request.user).order_by('-created_at')
+    if request.user.is_authenticated:
+        # Show listing of other users
+        listings = Listings.objects.exclude(user=request.user).order_by('-created_at')
+    else:
+        # if not logged in, show all listings
+        listings = Listings.objects.all().order_by('-created_at')
     return render(request, "auctions/index.html", {
         "listings": listings
     })
@@ -21,6 +26,15 @@ def myListings(request):
     listings = Listings.objects.filter(user=request.user)
     return render(request, "auctions/myListings.html", {
         "listings": listings
+    })
+
+def listingPage(request, listing_id):
+    listing = Listings.objects.get(id=listing_id)
+    bid = Bids.objects.filter(listing=listing)
+    return render(request, "auctions/listingpage.html", {
+        "listing": listing,
+        "bid": bid.order_by('-bid_amount').first(),
+        "count": bid.count()
     })
 
 @login_required
@@ -43,6 +57,43 @@ def create(request):
         return render(request, "auctions/create.html", {
             "categories": categories
         })
+
+@login_required
+def bid(request, listing_id):
+    if request.method == "POST":
+        listing = Listings.objects.get(id=listing_id)
+        bid_amount = float(request.POST['bid'])
+        user = request.user
+        currentBids = Bids.objects.filter(listing=listing)
+
+        if currentBids.count() == 0:
+            if bid_amount > listing.starting_bid:
+                new_bid = Bids(bid_amount=bid_amount, bidder=user, listing=listing)
+                new_bid.save()
+                return HttpResponseRedirect(reverse("listingPage", args=(listing_id,)))
+            else:
+                message = "Bid must be greater than starting bid"
+                return render(request, "auctions/listingpage.html", {
+                    "listing": listing,
+                    "message": message
+                })
+        else:
+            currentBid = currentBids.order_by('-bid_amount')[0]
+            if bid_amount > currentBid.bid_amount:
+                print("New bid is higher than current bid")
+                new_bid = Bids(bid_amount=bid_amount, bidder=user, listing=listing)
+                new_bid.save()
+                return HttpResponseRedirect(reverse("listingPage", args=(listing_id,)))
+            else:
+                message = "Bid must be greater than current bid"
+                return render(request, "auctions/listingpage.html", {
+                    "listing": listing,
+                    "bid": currentBids.order_by('-bid_amount')[0],
+                    "count": currentBids.count(),
+                    "message": message
+                })
+
+
 
 def login_view(request):
     if request.method == "POST":

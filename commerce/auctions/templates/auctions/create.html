@@ -10,15 +10,14 @@
         <div class="form-group">
             <textarea name="description" placeholder="Description" class="form-control w-75" id="description"></textarea>
         </div>
-
         <div class="form-group">
             <select class="form-control w-25" name="category" id="category" required>
+                <option value="" disabled selected>Select Category</option>
                 {% for category in categories %}
                     <option value="{{category.0}}" >{{category.1}}</option>
                 {% endfor %}
             </select>
         </div>
-
         <div class="form-group">
             <input type="number" name="price" placeholder="Price" class="form-control w-25" id="price" min="0" step=".1" required/>
         </div>

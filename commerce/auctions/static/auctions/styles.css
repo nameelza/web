@@ -2,6 +2,10 @@ body {
     padding: 10px;
 }
 
+h2 {
+    margin-bottom: 20px;
+}
+
 .listing {
     display:flex;
     border: 1px solid #ccc;
@@ -9,6 +13,7 @@ body {
     height: 300px;
     padding: 10px;
     margin: 10px;
+
 }
 
 .listing img {
@@ -17,4 +22,30 @@ body {
 
 .listingInfo {
     margin-left: 20px;
+}
+
+p {
+    font-size: 14px;
+}
+
+#date {
+    color: slategrey;
+}
+
+.listingLink {
+    text-decoration: none;
+    color: black;
+}
+
+.listingPage img {
+    max-height: 400px;
+    margin: 10px 0 20px 0;
+}
+
+.listingPage {
+    margin-left: 20px;
+}
+
+.listingPage form  {
+    margin: 20px 0;
 }
