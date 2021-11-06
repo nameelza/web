@@ -1,34 +1,49 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-<h2>Listing: {{listing.title}}</h2>
-<div class="listingPage">
-    <img src="{{listing.image}}" alt="{{listing.title}} image" />
-    <p>{{listing.description}}</p>
-    <h4>${{listing.starting_bid}}</h4>
-    {% if bid %}
-        <h4>Current bid: ${{bid.bid_amount}} made by {{bid.bidder.username}}</h4>
+<h2>{{listing.title}}</h2>
+<form action="{% url 'watchlistAdd' listing.id %}">
+    {% csrf_token %}
+    {% if inWatchlist %}
+        <button type="submit" id="deletewatchlist" name="delete">Delete from watchlist</button>
     {% else %}
-        <h4>No bids yet</h4>
+        <button type="submit" id="addwatchlist" name="add" >Add to watchlist</button>
     {% endif %}
+</form>
+<div class="listingPage">
+    <div class="listingPageImage">
+        <img src="{{listing.image}}" alt="{{listing.title}} image" />
+    </div>
+    <div class="listingPageInfo">
+        
+        <h4>${{listing.starting_bid}}</h4>
+        {% if bid %}
+            <h4>Current bid: ${{bid.bid_amount}} made by {{bid.bidder.username}}</h4>
+        {% else %}
+            <h4>No bids yet</h4>
+        {% endif %}
 
-    <form action="{% url 'bid' listing.id %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group">
-            {% if message %}
-                <div class="alert alert-primary w-25">{{message}}</div>
+        <form action="{% url 'bid' listing.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                {% if message %}
+                    <div class="alert alert-primary">{{message}}</div>
+                {% endif %}
+                <small id="emailHelp" class="form-text text-muted">{{count}} bid(s) so far</small>
+                <input type='number' name='bid' placeholder='Enter your bid' class="form-control" step="0.1" min="0" />
+            </div>
+            <button type="submit" class="btn btn-primary">Place Bid</button>
+        </form>
+
+        <h4>Details</h4>
+        <ul>
+            {% if listing.description %}
+            <li>{{listing.description}}</li>
             {% endif %}
-            <small id="emailHelp" class="form-text text-muted">{{count}} bid(s) so far</small>
-            <input type='number' name='bid' placeholder='Enter your bid' class="form-control w-25" step="0.1" min="0" />
-        </div>
-        <button type="submit" class="btn btn-primary">Place Bid</button>
-    </form>
-
-    <h4>Details</h4>
-    <ul>
-        <li>Listed by {{listing.user.username}}</li>
-        <li>Category: {{listing.category}}</li>
-    </ul>
+            <li>Listed by {{listing.user.username}}</li>
+            <li>Category: {{category}}</li>
+        </ul>
+    </div>
 
 </div>
 

@@ -43,9 +43,43 @@ p {
 }
 
 .listingPage {
-    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.listingPageInfo {
+    margin: 5px 0 0 40px;
 }
 
 .listingPage form  {
     margin: 20px 0;
+}
+
+#addwatchlist {
+    height: fit-content;
+    width: fit-content;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: rgb(122, 122, 122);
+    color: white;
+    border-radius: 4px;
+    border: none;
+}
+
+#addwatchlist:hover, #deletewatchlist:hover  {
+    background-color: rgb(75, 75, 75);
+    color: white;
+}
+
+#deletewatchlist {
+    height: fit-content;
+    width: fit-content;
+    font-size: 10px;
+    font-weight: bold;
+    padding: 5px;
+    background-color: rgb(122, 122, 122);
+    color: white;
+    border-radius: 4px;
+    border: none;
 }

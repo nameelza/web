@@ -5,10 +5,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django import forms
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
-from .models import User, Listings, Bids
-
+from .models import User, Listings, Bids, Watchlist
 
 def index(request):
     if request.user.is_authenticated:
@@ -30,11 +29,18 @@ def myListings(request):
 
 def listingPage(request, listing_id):
     listing = Listings.objects.get(id=listing_id)
+    category = listing.get_category_display()
     bid = Bids.objects.filter(listing=listing)
+    if Watchlist.objects.filter(user=request.user, listing=listing).exists():
+        inWatchlist = True
+    else:
+        inWatchlist = False
     return render(request, "auctions/listingpage.html", {
         "listing": listing,
+        "category": category,
         "bid": bid.order_by('-bid_amount').first(),
-        "count": bid.count()
+        "count": bid.count(),
+        "inWatchlist": inWatchlist
     })
 
 @login_required
@@ -72,7 +78,7 @@ def bid(request, listing_id):
                 new_bid.save()
                 return HttpResponseRedirect(reverse("listingPage", args=(listing_id,)))
             else:
-                message = "Bid must be greater than starting bid"
+                message = "Bid must be greater than price"
                 return render(request, "auctions/listingpage.html", {
                     "listing": listing,
                     "message": message
@@ -93,7 +99,23 @@ def bid(request, listing_id):
                     "message": message
                 })
 
+@login_required
+def watchlistAdd(request, listing_id):
+    listing = Listings.objects.get(id=listing_id)
+    user = request.user
+    if Watchlist.objects.filter(listing=listing, user=user).count() == 0:
+        new_watchlist = Watchlist(listing=listing, user=user)
+        new_watchlist.save()
+    else:
+        Watchlist.objects.filter(listing=listing, user=user).delete()
+    return HttpResponseRedirect(reverse("listingPage", args=(listing_id,)))
 
+@login_required
+def watchlist(request):
+    watchlist = Watchlist.objects.filter(user=request.user)
+    return render(request, "auctions/watchlist.html", {
+        "watchlist": watchlist
+    })
 
 def login_view(request):
     if request.method == "POST":
