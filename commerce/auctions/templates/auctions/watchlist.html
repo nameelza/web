@@ -2,17 +2,21 @@
 
 {% block body %}
 <h2>My watchlist</h2>
-    {% for item in watchlist %}
-    <div class="listing">
-        <img src="{{item.listing.image}}" alt="Listing image">
-        <div class="listingInfo">
-            <a href="{% url 'listingPage' item.listing.id %}" class="listingLink">
-                <h3>{{item.listing.title}}</h3>
-            </a>
-            <h4>${{item.listing.starting_bid}}</h4>
-            <p>{{item.listing.description}}</p>
-            <p id="date">Created {{item.listing.created_at}}</p>
+    {% if watchlist %}
+        {% for item in watchlist %}
+        <div class="listing">
+            <img src="{{item.listing.image}}" alt="Listing image">
+            <div class="listingInfo">
+                <a href="{% url 'listingPage' item.listing.id %}" class="listingLink">
+                    <h3>{{item.listing.title}}</h3>
+                </a>
+                <h4>${{item.listing.starting_bid}}</h4>
+                <p>{{item.listing.description}}</p>
+                <p id="date">Created {{item.listing.created_at}}</p>
+            </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <h6>You have no listings in your watchlist</h6>
+    {% endif %}
 {% endblock %}

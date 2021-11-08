@@ -20,6 +20,7 @@ class Listings(models.Model):
     image = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=False)
     starting_bid = models.DecimalField(max_digits=6, decimal_places=2, blank=False)
+    is_open = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -39,6 +40,14 @@ class Watchlist(models.Model):
 
     def __str__(self):
         return f'{self.user.username} is watching {self.listing.title}'
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Listings, on_delete=models.CASCADE)
+    comment = models.TextField(blank=False)
+
+    def __str__(self):
+        return f'{self.user.username} commented on {self.listing.title}'
     
 
 

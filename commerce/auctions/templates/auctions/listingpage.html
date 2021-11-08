@@ -15,25 +15,35 @@
         <img src="{{listing.image}}" alt="{{listing.title}} image" />
     </div>
     <div class="listingPageInfo">
-        
-        <h4>${{listing.starting_bid}}</h4>
-        {% if bid %}
-            <h4>Current bid: ${{bid.bid_amount}} made by {{bid.bidder.username}}</h4>
-        {% else %}
-            <h4>No bids yet</h4>
-        {% endif %}
+            <h4>${{listing.starting_bid}}</h4>
+            {% if listing.is_open %}
+            {% if bid %}
+                <h4>Current bid: ${{bid.bid_amount}} made by {{bid.bidder.username}}</h4>
+            {% else %}
+                <h4>No bids yet</h4>
+            {% endif %}
 
-        <form action="{% url 'bid' listing.id %}" method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-                {% if message %}
-                    <div class="alert alert-primary">{{message}}</div>
-                {% endif %}
+            {% if not isOwner %}
+            <form action="{% url 'bid' listing.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    {% if message %}
+                        <div class="alert alert-primary">{{message}}</div>
+                    {% endif %}
+                    <small id="emailHelp" class="form-text text-muted">{{count}} bid(s) so far</small>
+                    <input type='number' name='bid' placeholder='Enter your bid' class="form-control" step="0.1" min="0" />
+                </div>
+                <button type="submit" class="btn btn-primary">Place Bid</button>
+                
+            </form>
+            {% else %}
+            <form action="{% url 'close' listing.id %}" method="POST">
+                {% csrf_token %}
                 <small id="emailHelp" class="form-text text-muted">{{count}} bid(s) so far</small>
-                <input type='number' name='bid' placeholder='Enter your bid' class="form-control" step="0.1" min="0" />
-            </div>
-            <button type="submit" class="btn btn-primary">Place Bid</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Close auction</button>
+            </form>
+            {% endif %}
+    
 
         <h4>Details</h4>
         <ul>
@@ -43,7 +53,35 @@
             <li>Listed by {{listing.user.username}}</li>
             <li>Category: {{category}}</li>
         </ul>
+        {% else %}
+            <h4>Auction closed</h4>
+            {% if user.id == bid.bidder.id %}
+                <h6>You won the auction for ${{bid.bid_amount}}</h6>
+            {% else %}
+                <h6>The winning bid was ${{bid.bid_amount}}</h6>
+            {% endif %}
+        {% endif %}
+        <h4>Comments</h4>
+        {% if comments %}
+            {% for comment in comments %}
+            <div>
+                <small id="emailHelp" class="form-text text-muted">{{comment.user.username}}</small>
+                <h6>{{comment.comment}}</h6>
+            </div>
+            {% endfor %}
+        {% else %}
+            <h6>No comments yet</h6>
+        {% endif %}
+        <form action="{% url 'comment' listing.id %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <textarea name="comment" class="form-control" rows="2" placeholder="Leave a comment"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
     </div>
+    
+
 
 </div>
 
