@@ -90,11 +90,10 @@ def categories(request):
     })
 
 def showCategory(request, category):
-    listings = Listings.objects.filter(category=category)
+    listings = Listings.objects.filter(category=category, is_open=True).order_by('-created_at')
     if listings.count() != 0:
         categoryName = listings.first().get_category_display()
     else:
-        message2 = "No listings in this category"
         categoryName = "No listings yet"
     return render(request, "auctions/index.html", {
         "listings": listings,
