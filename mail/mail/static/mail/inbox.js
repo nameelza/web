@@ -55,58 +55,30 @@ function load_mailbox(mailbox) {
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
-  if (mailbox == 'inbox') {
-    fetch('/emails/inbox')
-    .then(response => response.json())
-    .then(emails => {
-        // Print emails
-        console.log(emails);
-        // ... do something else with emails ...
-        emails.forEach(email => {
-          document.querySelector('#emails-view').innerHTML += `
-            <div class="email">
-              <div class="sender">${email.sender}</div>
-              <div class="subject">${email.subject}</div>
-              <div class="timestamp">${email.timestamp}</div>
-            </div>
-          `;
-        });
-    });
+  // Fetch the emails
+  fetch(`/emails/${mailbox}`)
+  .then(response => response.json())
+  .then(emails => {
+      // Print emails
+      console.log(emails);
 
-  } else if (mailbox == 'sent') {
-    fetch('/emails/sent')
-    .then(response => response.json())
-    .then(emails => {
-        // Print emails
-        console.log(emails);
-        // ... do something else with emails ...
-        emails.forEach(email => {
-          document.querySelector('#emails-view').innerHTML += `
-            <div class="email">
-              <div class="sender">${email.recipients}</div>
-              <div class="subject">${email.subject}</div>
-              <div class="timestamp">${email.timestamp}</div>
-            </div>
-          `;
-        });
-    });
-
-  } else if (mailbox == 'archive') {
-    fetch('/emails/archive')
-    .then(response => response.json())
-    .then(emails => {
-        // Print emails
-        console.log(emails);
-        // ... do something else with emails ...
-        emails.forEach(email => {
-          document.querySelector('#emails-view').innerHTML += `
-            <div class="email">
-              <div class="sender">${email.sender}</div>
-              <div class="subject">${email.subject}</div>
-              <div class="timestamp">${email.timestamp}</div>
-            </div>
-          `;
-        });
-    });
-  }
+      // Add each email to the DOM
+      emails.forEach(email => {
+        if (email.read === false) {
+          document.querySelector('#emails-view').innerHTML +=
+          `<div class="email" id="notReadEmail">
+            <div class="sender">${email.sender}</div>
+            <div class="subject">${email.subject}</div>
+            <div class="timestamp">${email.timestamp}</div>
+          </div>`;
+        } else {
+          document.querySelector('#emails-view').innerHTML +=
+          `<div class="email" id="readEmail">
+            <div class="sender">${email.sender}</div>
+            <div class="subject">${email.subject}</div>
+            <div class="timestamp">${email.timestamp}</div>
+          </div>`;
+        }
+      });
+  });
 }
