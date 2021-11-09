@@ -62,23 +62,40 @@ function load_mailbox(mailbox) {
         // Print emails
         console.log(emails);
 
-        // Add each email to the DOM
+        // For each email, add an element to the DOM
         emails.forEach(email => {
+            let div = document.createElement('div');
+            div.className = "email";
+
             if (email.read === false) {
-              document.querySelector('#emails-view').innerHTML +=
-              `<div class="email" id="notReadEmail" data-id="${email.id}">
-                <div class="sender">${email.sender}</div>
-                <div class="subject">${email.subject}</div>
-                <div class="timestamp">${email.timestamp}</div>
-              </div>`;
+              div.id = "notReadEmail";
             } else {
-              document.querySelector('#emails-view').innerHTML +=
-              `<div class="email" id="readEmail" data-id="${email.id}">
-                <div class="sender">${email.sender}</div>
-                <div class="subject">${email.subject}</div>
-                <div class="timestamp">${email.timestamp}</div>
-              </div>`;
+              div.id = "readEmail";
             }
+
+            div.dataset.id = `${email.id}`
+
+            let divSender = document.createElement('div')
+            divSender.className = "sender";
+            let sender = document.createTextNode(`${email.sender}`);
+            divSender.appendChild(sender);
+
+            let divSubject = document.createElement('div')
+            divSubject.className = "subject";
+            let subject = document.createTextNode(`${email.subject}`);
+            divSubject.appendChild(subject);
+
+            let divTime = document.createElement('div')
+            divTime.className = "timestamp";
+            let time = document.createTextNode(`${email.timestamp}`);
+            divTime.appendChild(time);
+
+            div.appendChild(divSender);
+            div.appendChild(divSubject);
+            div.appendChild(divTime);
+            console.log(div);
+            document.querySelector('#emails-view').appendChild(div);
+
         });
 
         // Add event listeners to each email
