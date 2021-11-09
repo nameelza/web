@@ -1,3 +1,30 @@
 textarea {
     min-height: 400px;
 }
+
+.email {
+    display: flex;
+    border: black solid 1px;
+    border-radius: 4px;
+    padding: 10px;
+    position:relative;
+}
+
+#emails-view .email:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.timestamp {
+    color: #999;
+    position: absolute;
+    right: 10px;
+
+}
+
+.sender {
+    width: 20%;
+}
+
+.subject{
+    width: 60%;
+}
