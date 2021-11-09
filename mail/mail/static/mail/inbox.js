@@ -48,37 +48,49 @@ function compose_email() {
 
 function load_mailbox(mailbox) {
   
-  // Show the mailbox and hide other views
-  document.querySelector('#emails-view').style.display = 'block';
-  document.querySelector('#compose-view').style.display = 'none';
+    // Show the mailbox and hide other views
+    document.querySelector('#emails-view').style.display = 'block';
+    document.querySelector('#compose-view').style.display = 'none';
 
-  // Show the mailbox name
-  document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+    // Show the mailbox name
+    document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
-  // Fetch the emails
-  fetch(`/emails/${mailbox}`)
-  .then(response => response.json())
-  .then(emails => {
-      // Print emails
-      console.log(emails);
+    // Fetch the emails
+    fetch(`/emails/${mailbox}`)
+    .then(response => response.json())
+    .then(emails => {
+        // Print emails
+        console.log(emails);
 
-      // Add each email to the DOM
-      emails.forEach(email => {
-        if (email.read === false) {
-          document.querySelector('#emails-view').innerHTML +=
-          `<div class="email" id="notReadEmail">
-            <div class="sender">${email.sender}</div>
-            <div class="subject">${email.subject}</div>
-            <div class="timestamp">${email.timestamp}</div>
-          </div>`;
-        } else {
-          document.querySelector('#emails-view').innerHTML +=
-          `<div class="email" id="readEmail">
-            <div class="sender">${email.sender}</div>
-            <div class="subject">${email.subject}</div>
-            <div class="timestamp">${email.timestamp}</div>
-          </div>`;
-        }
-      });
-  });
+        // Add each email to the DOM
+        emails.forEach(email => {
+            if (email.read === false) {
+              document.querySelector('#emails-view').innerHTML +=
+              `<div class="email" id="notReadEmail" data-id="${email.id}">
+                <div class="sender">${email.sender}</div>
+                <div class="subject">${email.subject}</div>
+                <div class="timestamp">${email.timestamp}</div>
+              </div>`;
+            } else {
+              document.querySelector('#emails-view').innerHTML +=
+              `<div class="email" id="readEmail" data-id="${email.id}">
+                <div class="sender">${email.sender}</div>
+                <div class="subject">${email.subject}</div>
+                <div class="timestamp">${email.timestamp}</div>
+              </div>`;
+            }
+        });
+
+        // Add event listeners to each email
+        document.querySelectorAll('.email').forEach(email => {
+            email.onclick = () => {
+                fetch(`/emails/${email.dataset.id}`)
+                .then(response => response.json())
+                .then(email => {
+                    // Print email
+                    console.log(email);
+                });
+            }
+        });
+    });
 }
