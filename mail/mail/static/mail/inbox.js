@@ -92,7 +92,6 @@ function load_mailbox(mailbox) {
             div.appendChild(divSubject);
             div.appendChild(divTime);
             document.querySelector('#emails-view').appendChild(div);
-
         });
 
         // Add event listeners to each email
@@ -110,7 +109,6 @@ function load_mailbox(mailbox) {
                       })
                     })
                     
-
                     // Show the email and hide other views
                     document.querySelector('#emails-view').style.display = 'none';
                     document.querySelector('#compose-view').style.display = 'none';
@@ -123,6 +121,7 @@ function load_mailbox(mailbox) {
                     document.querySelector('#body').innerHTML = `${email.body}`
                     document.querySelector('#timestamp').innerHTML = `${email.timestamp}`
 
+                    
                 });
             }
         });
