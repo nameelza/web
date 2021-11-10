@@ -15,6 +15,7 @@ function compose_email() {
   // Show compose view and hide other views
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'block';
+  document.querySelector('#singleEmail-view').style.display = 'none';
 
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = '';
@@ -51,6 +52,7 @@ function load_mailbox(mailbox) {
     // Show the mailbox and hide other views
     document.querySelector('#emails-view').style.display = 'block';
     document.querySelector('#compose-view').style.display = 'none';
+    document.querySelector('#singleEmail-view').style.display = 'none';
 
     // Show the mailbox name
     document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
@@ -106,6 +108,34 @@ function load_mailbox(mailbox) {
                 .then(email => {
                     // Print email
                     console.log(email);
+                    document.querySelector('#emails-view').style.display = 'none';
+                    document.querySelector('#singleEmail-view').style.display = 'block';
+
+                    let spanFrom = document.createElement('span');
+                    let from = document.createTextNode(`${email.sender}`);
+                    spanFrom.appendChild(from);
+                    document.querySelector('#from').appendChild(spanFrom);
+
+                    let spanTo = document.createElement('span');
+                    let to = document.createTextNode(`${email.recipients}`);
+                    spanTo.appendChild(to);
+                    document.querySelector('#to').appendChild(spanTo);
+
+                    let spanSubject = document.createElement('span');
+                    let subject = document.createTextNode(`${email.subject}`);
+                    spanSubject.appendChild(subject);
+                    document.querySelector('#subject').appendChild(spanSubject);
+
+                    let spanTimestamp = document.createElement('span');
+                    let timestamp = document.createTextNode(`${email.timestamp}`);
+                    spanTimestamp.appendChild(timestamp);
+                    document.querySelector('#timestamp').appendChild(spanTimestamp);
+
+                    let spanBody = document.createElement('span');
+                    let body = document.createTextNode(`${email.body}`);
+                    spanBody.appendChild(body);
+                    document.querySelector('#body').appendChild(spanBody);
+
                 });
             }
         });

@@ -32,6 +32,35 @@
             <input type="submit" id="compose-button" class="btn btn-primary"/>
         </form>
     </div>
+
+    <div id="singleEmail-view">
+        <div>
+            <div class="emailInfo" id="from">
+                <span class="bold">From: </span>
+            </div>
+            
+            <div class="emailInfo" id="to">
+                <span class="bold">To: </span>
+            </div>
+
+            <div class="emailInfo" id="subject">
+                <span class="bold">Subject: </span>
+            </div>
+
+            <div class="emailInfo" id="timestamp">
+                <span class="bold">Timestamp: </span>
+            </div>
+
+            <button class="btn btn-sm btn-outline-primary" id="reply">Reply</button>
+            <button class="btn btn-sm btn-outline-primary" id="archive">Archive</button>
+            <button class="btn btn-sm btn-outline-primary" id="delete">Delete</button>
+            <hr>
+            <div id="body">
+            </div>
+
+        </div>
+    </div>
+
 {% endblock %}
 
 {% block script %}
