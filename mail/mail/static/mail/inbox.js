@@ -61,9 +61,6 @@ function load_mailbox(mailbox) {
     fetch(`/emails/${mailbox}`)
     .then(response => response.json())
     .then(emails => {
-        // Print emails
-        console.log(emails);
-
         // For each email, add an element to the DOM
         emails.forEach(email => {
             let div = document.createElement('div');
@@ -95,7 +92,6 @@ function load_mailbox(mailbox) {
             div.appendChild(divSender);
             div.appendChild(divSubject);
             div.appendChild(divTime);
-            console.log(div);
             document.querySelector('#emails-view').appendChild(div);
 
         });
@@ -106,35 +102,18 @@ function load_mailbox(mailbox) {
                 fetch(`/emails/${email.dataset.id}`)
                 .then(response => response.json())
                 .then(email => {
-                    // Print email
-                    console.log(email);
+
+                    // Show the email and hide other views
                     document.querySelector('#emails-view').style.display = 'none';
                     document.querySelector('#singleEmail-view').style.display = 'block';
 
-                    let spanFrom = document.createElement('span');
-                    let from = document.createTextNode(`${email.sender}`);
-                    spanFrom.appendChild(from);
-                    document.querySelector('#from').appendChild(spanFrom);
+                    // Show the email
+                    document.querySelector('#from').innerHTML = `${email.sender}`
+                    document.querySelector('#to').innerHTML = `${email.recipients}`
+                    document.querySelector('#subject').innerHTML = `${email.subject}`
+                    document.querySelector('#body').innerHTML = `${email.body}`
+                    document.querySelector('#timestamp').innerHTML = `${email.timestamp}`
 
-                    let spanTo = document.createElement('span');
-                    let to = document.createTextNode(`${email.recipients}`);
-                    spanTo.appendChild(to);
-                    document.querySelector('#to').appendChild(spanTo);
-
-                    let spanSubject = document.createElement('span');
-                    let subject = document.createTextNode(`${email.subject}`);
-                    spanSubject.appendChild(subject);
-                    document.querySelector('#subject').appendChild(spanSubject);
-
-                    let spanTimestamp = document.createElement('span');
-                    let timestamp = document.createTextNode(`${email.timestamp}`);
-                    spanTimestamp.appendChild(timestamp);
-                    document.querySelector('#timestamp').appendChild(spanTimestamp);
-
-                    let spanBody = document.createElement('span');
-                    let body = document.createTextNode(`${email.body}`);
-                    spanBody.appendChild(body);
-                    document.querySelector('#body').appendChild(spanBody);
 
                 });
             }
