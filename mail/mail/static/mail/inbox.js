@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+  
   // Use buttons to toggle between views
   document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
@@ -23,7 +23,7 @@ function compose_email() {
   document.querySelector('#compose-body').value = '';
 
   // Compose button sends the email
-  document.querySelector('#compose-form').onsubmit = function () {
+  document.querySelector('#compose-form').onsubmit = () => {
     const recipients = document.querySelector('#compose-recipients');
     const subject = document.querySelector('#compose-subject');
     const body = document.querySelector('#compose-body');
@@ -37,11 +37,10 @@ function compose_email() {
     })
     .then(response => response.json())
     .then(result => {
-        // Print result
-        console.log(result);
-        console.log(result.message);
-        // Redirect to sent view
-        load_mailbox('sent');
+      load_mailbox('sent');
+      console.log(result);
+
+        
     });
   }
 
@@ -103,8 +102,18 @@ function load_mailbox(mailbox) {
                 .then(response => response.json())
                 .then(email => {
 
+                    // Email is now read
+                    fetch(`/emails/${email.id}`, {
+                      method: 'PUT',
+                      body: JSON.stringify({
+                          read: true
+                      })
+                    })
+                    
+
                     // Show the email and hide other views
                     document.querySelector('#emails-view').style.display = 'none';
+                    document.querySelector('#compose-view').style.display = 'none';
                     document.querySelector('#singleEmail-view').style.display = 'block';
 
                     // Show the email
@@ -113,7 +122,6 @@ function load_mailbox(mailbox) {
                     document.querySelector('#subject').innerHTML = `${email.subject}`
                     document.querySelector('#body').innerHTML = `${email.body}`
                     document.querySelector('#timestamp').innerHTML = `${email.timestamp}`
-
 
                 });
             }
