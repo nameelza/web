@@ -33,11 +33,15 @@ function compose_email() {
         body: body.value,
       }),
     })
+      
       .then((response) => response.json())
       .then((result) => {
         load_mailbox("sent");
         console.log(result);
+        document.innerHTML = result;
       });
+      load_mailbox("sent");
+      document.innerHTML = result;
   };
 }
 
@@ -46,7 +50,6 @@ function load_mailbox(mailbox) {
   document.querySelector("#emails-view").style.display = "block";
   document.querySelector("#compose-view").style.display = "none";
   document.querySelector("#singleEmail-view").style.display = "none";
-
   // Show the mailbox name
   document.querySelector("#emails-view").innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
 
@@ -107,7 +110,6 @@ function load_mailbox(mailbox) {
               document.querySelector("#emails-view").style.display = "none";
               document.querySelector("#compose-view").style.display = "none";
               document.querySelector("#singleEmail-view").style.display = "block";
-              console.log(email);
 
               // Show the email
               document.querySelector("#from").innerHTML = `${email.sender}`;
@@ -116,9 +118,24 @@ function load_mailbox(mailbox) {
               document.querySelector("#body").innerHTML = `${email.body}`;
               document.querySelector("#timestamp").innerHTML = `${email.timestamp}`;
 
+              // Hide reply button if mailbox is sent
+              if (mailbox === "sent") {
+                document.querySelector("#buttons").style.display = "none";
+              } else {
+                document.querySelector("#buttons").style.display = "block";
+              }
+
+            
+
+              // Show archive or unarchive button, depending on whether the email is archived
+              if (email.archived === true) {
+                document.querySelector("#archive").innerHTML = "Unarchive";
+              } else {
+                document.querySelector("#archive").innerHTML = "Archive";
+              }
+
               // Archive or unarchive the email
               document.querySelector('#archive').onclick = () => {
-                console.log(email.archive);
                 if (email.archived === false) {
                   fetch(`/emails/${email.id}`, {
                     method: "PUT",
@@ -126,7 +143,7 @@ function load_mailbox(mailbox) {
                       archived: true
                     })
                   });
-                  load_mailbox("archive");
+                  load_mailbox("inbox");
                 } else {
                   fetch(`/emails/${email.id}`, {
                     method: "PUT",

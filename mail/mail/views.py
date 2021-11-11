@@ -36,6 +36,10 @@ def compose(request):
         return JsonResponse({
             "error": "At least one recipient required."
         }, status=400)
+    elif request.user.email in emails:
+        return JsonResponse({
+            "error": "Sender cannot be recipient."
+        }, status=400)
 
     # Convert email addresses to users
     recipients = []
