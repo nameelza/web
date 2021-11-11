@@ -25,6 +25,7 @@ function compose_email() {
     const recipients = document.querySelector("#compose-recipients");
     const subject = document.querySelector("#compose-subject");
     const body = document.querySelector("#compose-body");
+    console.log('COMPOSE');
     fetch("/emails", {
       method: "POST",
       body: JSON.stringify({
@@ -33,15 +34,22 @@ function compose_email() {
         body: body.value,
       }),
     })
-      
       .then((response) => response.json())
       .then((result) => {
-        load_mailbox("sent");
-        console.log(result);
-        document.innerHTML = result;
+        if (result.error) {
+          let divAlert = document.createElement("div");
+          divAlert.innerHTML = result.error;
+          divAlert.className = "alert alert-danger";
+          document.querySelector("#emails-view").appendChild(divAlert);
+        } else if (result.message) {
+          let divAlert = document.createElement("div");
+          divAlert.innerHTML = result.message;
+          divAlert.className = "alert alert-success";
+          document.querySelector("#emails-view").appendChild(divAlert);
+        }
       });
       load_mailbox("sent");
-      document.innerHTML = result;
+      return false;
   };
 }
 
@@ -124,8 +132,6 @@ function load_mailbox(mailbox) {
               } else {
                 document.querySelector("#buttons").style.display = "block";
               }
-
-            
 
               // Show archive or unarchive button, depending on whether the email is archived
               if (email.archived === true) {
