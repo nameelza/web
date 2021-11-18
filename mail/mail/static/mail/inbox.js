@@ -19,8 +19,9 @@ function compose_email({body, sender, timestamp, subject}) {
 
   // Clear out composition fields
   document.querySelector("#compose-recipients").value = sender || "";
+
+  // Recipient disabled if replying to email
   if (sender) {
-    console.log(sender, "sender")
     document.querySelector("#compose-recipients").disabled = true;
   } else {
     document.querySelector("#compose-recipients").disabled = false;
@@ -32,7 +33,12 @@ function compose_email({body, sender, timestamp, subject}) {
       document.querySelector("#compose-subject").value = subject ? `Re: ${subject}` : "";
   }
 
-  document.querySelector("#compose-body").value = body ? `On ${timestamp} ${sender} wrote: \n ${body} \n` : "";
+  document.querySelector("#compose-body").value = body ? `On ${timestamp} ${sender} wrote: ${body} \n` : "";
+
+  // Autofocus on body when replying to email
+  if (body) {
+    document.querySelector("#compose-body").focus();
+  } 
 
   // Compose button sends the email
   document.querySelector("#compose-form").onsubmit = () => {
