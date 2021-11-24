@@ -19,8 +19,6 @@ textarea {
     border: none;
 }
 
-img {
-    max-height: 18px;
-    padding-bottom: 4px;
-    margin-right: 4px;
+svg {
+    margin-bottom: 2px;
 }
