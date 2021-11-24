@@ -15,10 +15,13 @@ def index(request):
             user = request.user
             new_post = Posts.objects.create(user=user, content=content)
             new_post.save()
-            print("new post saved")
             return HttpResponseRedirect(reverse("index"))
         else:
             posts = Posts.objects.order_by("-date").all()
+            # Update likes count
+            for post in posts:
+                post.likesCount = post.likers.count()
+                post.save()
             return render(request, "network/index.html", {
                 "posts": posts
             })

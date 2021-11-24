@@ -1,24 +1,35 @@
-{% extends "network/layout.html" %}
-
-{% block body %}
-    <h1>All Posts</h1>
-    <hr>
-    <div class="post" id="newPost">
-        <form action="{% url 'index' %}" method="POST">
-        {% csrf_token %}
-        <div class="form-group"><textarea placeholder="What's up?" name="content" class="form-control w-100" maxlength="200"></textarea></div>
-        <input class="btn btn-primary" type="submit" value="Post">
-        </form>
+{% extends "network/layout.html" %} {% block script %}
+<script
+  src="https://kit.fontawesome.com/f5927c0c2a.js"
+  crossorigin="anonymous"
+></script>
+{% endblock %} {% block body %}
+<h1>All Posts</h1>
+<hr />
+<div class="post" id="newPost">
+  <form action="{% url 'index' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <textarea
+        placeholder="What's up?"
+        name="content"
+        class="form-control w-100"
+        maxlength="200"
+      ></textarea>
     </div>
-    
-    {% for post in posts%}
-    <div class="post">
-        <h2>{{post.user.username}}</h2>
-        <h6>{{post.content}}</h6>
-        <small>{{post.date}}</small>
-        <p>0 likes</p>
-    </div>
-    {%endfor%}
-   
+    <input class="btn btn-primary" type="submit" value="Post" />
+  </form>
+</div>
 
-{% endblock %}
+{% for post in posts%}
+<div class="post">
+  <h2>{{post.user.username}}</h2>
+  <h6>{{post.content}}</h6>
+  <small>{{post.date}}</small>
+  <!-- If current user liked the post, red heart icon -->
+  <i class="far fa-heart">2</i>
+  <i class="far fa-heart"></i>
+  <i class="fas fa-people-arrows"></i>
+  <span><i class="far fa-heart">{{post.likesCount}}</span>
+</div>
+{%endfor%} {% endblock %}
