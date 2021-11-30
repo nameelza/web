@@ -28,6 +28,11 @@ def index(request):
     else:
         return render(request, "network/login.html")
     
+def profile(request, user_id):
+    user = User.objects.get(id=user_id)
+    return render(request, "network/profile.html", {
+        "user": user
+    })
 
 
 def login_view(request):

@@ -19,5 +19,12 @@ class Posts(models.Model):
 def __str__(self):
     return self.content
 
+class User_Followers(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, on_delete=models.CASCADE)
+
+def __str__(self):
+    return self.user.username + " follows " + self.follower.username
+
 
 
