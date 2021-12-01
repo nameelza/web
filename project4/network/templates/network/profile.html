@@ -9,9 +9,15 @@
     <a href="{% url 'following' profile_user.username %}">{{following_count}} Following</a>
 </div>
 {% if not my_profile %}
+    {% if is_following %}
     <div>
-        <button>Follow</button>
+        <button class="follow">Following</button>
     </div>
+    {% else %}
+    <div>
+        <button class="follow">Follow</button>
+    </div>
+    {% endif %}
 {% endif %}
 {% for post in posts%}
     <div class="post">

@@ -33,16 +33,23 @@ def profile(request, username):
     posts = Posts.objects.filter(user=user).order_by("-date")
     followers_count = User_Followers.objects.filter(user=user).count()
     following_count = User_Followers.objects.filter(follower=user).count()
+    # Check if user on own profile
     if request.user == user:
         my_profile = True
+        # check if user is following
+        if User_Followers.objects.filter(user=user, follower=request.user).count() > 0:
+            is_following = True
     else: 
         my_profile = False
+        is_following = False
+    
     return render(request, "network/profile.html", {
         "profile_user": user,
         "posts": posts,
         "followers_count": followers_count,
         "following_count": following_count,
-        "my_profile": my_profile
+        "my_profile": my_profile,
+        "is_following": is_following
     })
 
 def followers(request, username):
