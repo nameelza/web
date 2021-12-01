@@ -2,12 +2,17 @@
 
 {% block body %}
 <div>
-    Hello, {{user.username}}
+    <h1>{{profile_user.username}}</h1>
 </div>
 <div>
-    <a href="{% url 'followers' user.username %}">{{followers_count}} Followers</a>
-    <a href="{% url 'following' user.username %}">{{following_count}} Following</a>
+    <a href="{% url 'followers' profile_user.username %}">{{followers_count}} Followers</a>
+    <a href="{% url 'following' profile_user.username %}">{{following_count}} Following</a>
 </div>
+{% if not my_profile %}
+    <div>
+        <button>Follow</button>
+    </div>
+{% endif %}
 {% for post in posts%}
     <div class="post">
         <h2>{{post.user.username}}</h2>

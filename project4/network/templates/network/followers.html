@@ -2,14 +2,14 @@
 
 {% block body %}
 <div>
-    {{user.username}}
+    {{profile_user.username}}
 </div>
 <div>
     Followers:
     {% for follower in followers %}
-        {{follower.follower.username}}
+        <a href="{% url 'profile' follower.follower.username %}">{{follower.follower.username}}</a>
     {% endfor %}
-    <a href="{% url 'following' user.username %}">Following</a>
+    <a href="{% url 'following' profile_user.username %}">Following</a>
 </div>
 
 {% endblock %}

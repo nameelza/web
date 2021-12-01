@@ -20,7 +20,7 @@
 
 {% for post in posts%}
 <div class="post">
-  <h2>{{post.user.username}}</h2>
+  <a href="{% url 'profile' post.user.username %}"><h2>{{post.user.username}}</h2></a>
   <h6>{{post.content}}</h6>
   <small>{{post.date}}</small>
   <div id="likeIcon">

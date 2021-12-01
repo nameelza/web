@@ -33,21 +33,24 @@ def profile(request, username):
     posts = Posts.objects.filter(user=user).order_by("-date")
     followers_count = User_Followers.objects.filter(user=user).count()
     following_count = User_Followers.objects.filter(follower=user).count()
+    if request.user == user:
+        my_profile = True
+    else: 
+        my_profile = False
     return render(request, "network/profile.html", {
-        "user": user,
+        "profile_user": user,
         "posts": posts,
         "followers_count": followers_count,
-        "following_count": following_count
+        "following_count": following_count,
+        "my_profile": my_profile
     })
 
 def followers(request, username):
     user = User.objects.get(username=username)
     followers = User_Followers.objects.filter(user=user)
-    print("Followers", followers)
-    print("User", user)
     return render(request, "network/followers.html", {
         "followers": followers,
-        "user": user
+        "profile_user": user
     })
 
 def following(request, username):
@@ -55,9 +58,8 @@ def following(request, username):
     following = User_Followers.objects.filter(follower=user)
     return render(request, "network/following.html", {
         "following": following,
-        "user": user
+        "profile_user": user
     })
-
 
 def login_view(request):
     if request.method == "POST":
