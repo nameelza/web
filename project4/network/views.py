@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 
-from .models import User, Posts
+from .models import User, Posts, User_Followers
 
 
 def index(request):
@@ -28,9 +28,25 @@ def index(request):
     else:
         return render(request, "network/login.html")
     
-def profile(request, user_id):
-    user = User.objects.get(id=user_id)
+def profile(request, username):
+    user = User.objects.get(username=username)
     return render(request, "network/profile.html", {
+        "user": user
+    })
+
+def followers(request, user_id):
+    user = User.objects.get(id=user_id)
+    followers = user.followers.all()
+    return render(request, "network/followers.html", {
+        "followers": followers,
+        "user": user
+    })
+
+def following(request, user_id):
+    user = User.objects.get(id=user_id)
+    following = User_Followers.objects.filter(follower=user)
+    return render(request, "network/following.html", {
+        "following": following,
         "user": user
     })
 

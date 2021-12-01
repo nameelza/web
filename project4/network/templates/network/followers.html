@@ -1,0 +1,12 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+<div>
+    {{user.username}}
+</div>
+<div>
+    Followers: {{followers}}
+    <a href="{% url 'following' user.id %}">Following</a>
+</div>
+
+{% endblock %}
