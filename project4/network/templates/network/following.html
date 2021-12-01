@@ -5,8 +5,11 @@
     {{user.username}}
 </div>
 <div>
-    <a href="{% url 'followers' user.id %}">{{followers_count}} Followers</a>
-    <a href="{% url 'following' user.id %}">{{following_count}} Following</a>
+    <a href="{% url 'followers' user.username %}">Followers</a>
+    Following: 
+    {% for follower in following %}
+            {{follower.user.username}}
+    {% endfor %}
 </div>
 
 {% endblock %}

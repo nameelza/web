@@ -30,20 +30,29 @@ def index(request):
     
 def profile(request, username):
     user = User.objects.get(username=username)
+    print("User", user)
+    followers_count = user.followers.count()
+    print("Followers", followers_count)
+    print("Followers", user.followers.all())
+    following_count = User_Followers.objects.filter(follower=user).count()
     return render(request, "network/profile.html", {
-        "user": user
+        "user": user,
+        "followers_count": followers_count,
+        "following_count": following_count
     })
 
-def followers(request, user_id):
-    user = User.objects.get(id=user_id)
-    followers = user.followers.all()
+def followers(request, username):
+    user = User.objects.get(username=username)
+    followers = User_Followers.objects.filter(user=user)
+    print("Followers", followers)
+    print("User", user)
     return render(request, "network/followers.html", {
         "followers": followers,
         "user": user
     })
 
-def following(request, user_id):
-    user = User.objects.get(id=user_id)
+def following(request, username):
+    user = User.objects.get(username=username)
     following = User_Followers.objects.filter(follower=user)
     return render(request, "network/following.html", {
         "following": following,

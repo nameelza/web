@@ -4,5 +4,9 @@
 <div>
     Hello, {{user.username}}
 </div>
-
+<div>
+    <a href="{% url 'followers' user.username %}">{{followers_count}} Followers</a>
+    
+    <a href="{% url 'following' user.username %}">{{following_count}} Following</a>
+</div>
 {% endblock %}
