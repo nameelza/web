@@ -1,12 +1,13 @@
+import json
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
-
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import User, Posts, User_Followers
-
 
 def index(request):
     if request.user.is_authenticated:
@@ -36,12 +37,14 @@ def profile(request, username):
     # Check if user on own profile
     if request.user == user:
         my_profile = True
+        is_following = False
+    else:
+        my_profile = False
         # check if user is following
         if User_Followers.objects.filter(user=user, follower=request.user).count() > 0:
             is_following = True
-    else: 
-        my_profile = False
-        is_following = False
+        else:
+            is_following = False
     
     return render(request, "network/profile.html", {
         "profile_user": user,
@@ -67,6 +70,26 @@ def following(request, username):
         "following": following,
         "profile_user": user
     })
+
+@csrf_exempt
+def follow(request, username):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+    else:
+        user = User.objects.get(username=username)
+        if request.user == user:
+            return JsonResponse({"error": "Cannot follow self."}, status=400)
+        print("user", user)
+        follower = request.user
+        print("follower", follower)
+        if User_Followers.objects.filter(user=user, follower=follower).count() == 0:
+            new_follower = User_Followers.objects.create(user=user, follower=follower)
+            new_follower.save()
+            print(new_follower)
+        else:
+            User_Followers.objects.filter(user=user, follower=follower).delete()
+        return HttpResponse(status=204)
+        
 
 def login_view(request):
     if request.method == "POST":

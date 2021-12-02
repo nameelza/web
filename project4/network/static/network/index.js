@@ -1,21 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('.follow').addEventListener('click', () => {
-        if (document.querySelector('.follow').innerHTML == 'Follow') {
-            document.querySelector('.follow').innerHTML = 'Following';
+    const followButton = document.querySelector('.follow')
+    const followersCount = document.querySelector('#followersCount')
+    followButton.addEventListener('click', () => {
+        if (followButton.innerHTML == 'Follow') {
+            followButton.innerHTML = 'Following';
+            followButton.style.color = '#000000';
+            let newCount = parseInt(followersCount.innerHTML) + 1;
+            followersCount.innerHTML = newCount;
         } else {
-            document.querySelector('.follow').innerHTML = 'Follow';
+            followButton.innerHTML = 'Follow';
+            followButton.style.color = '#000000';
+            let newCount = parseInt(followersCount.innerHTML) - 1;
+            followersCount.innerHTML = newCount;
         }
+        // Post request to follow/unfollow
+        const user = document.querySelector('#username').innerHTML;
+        fetch(`${user}/follow`, {
+            method: "POST",
+          })
     });
-    document.querySelector('.follow').addEventListener('mouseover', () =>  {
+    followButton.addEventListener('mouseover', () =>  {
         console.log('mouseover');
-        if (document.querySelector('.follow').innerHTML == 'Following') {
-            document.querySelector('.follow').innerHTML = 'Unfollow';
+        if (followButton.innerHTML == 'Following') {
+            followButton.innerHTML = 'Unfollow';
+            followButton.style.color = '#f44336';
         }
     });
-    document.querySelector('.follow').addEventListener('mouseout', () =>  {
+    followButton.addEventListener('mouseout', () =>  {
         console.log('mouseout');
-        if (document.querySelector('.follow').innerHTML == 'Unfollow') {
-            document.querySelector('.follow').innerHTML = 'Following';
+        if (followButton.innerHTML == 'Unfollow') {
+            followButton.innerHTML = 'Following';
+            followButton.style.color = '#000000';
         }
     });
 });

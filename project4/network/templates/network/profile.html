@@ -2,10 +2,10 @@
 
 {% block body %}
 <div>
-    <h1>{{profile_user.username}}</h1>
+    <h1 id="username">{{profile_user.username}}</h1>
 </div>
 <div>
-    <a href="{% url 'followers' profile_user.username %}">{{followers_count}} Followers</a>
+    <a href="{% url 'followers' profile_user.username %}"><span id="followersCount">{{followers_count}}</span> Followers</a>
     <a href="{% url 'following' profile_user.username %}">{{following_count}} Following</a>
 </div>
 {% if not my_profile %}
