@@ -5,11 +5,11 @@
     {{profile_user.username}}
 </div>
 <div>
-    <a href="{% url 'followers' profile_user.username %}">Followers</a>
     Following: 
     {% for follower in following %}
         <a href="{% url 'profile' follower.user.username %}">{{follower.user.username}}</a>
     {% endfor %}
+    <a href="{% url 'followers' profile_user.username %}">Followers</a>
 </div>
 
 {% endblock %}

@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import User, Posts, User_Followers
 
 def index(request):
+    # Show all posts
     if request.user.is_authenticated:
         if request.method =="POST":
             content = request.POST["content"]
@@ -24,38 +25,63 @@ def index(request):
                 post.likesCount = post.likers.count()
                 post.save()
             return render(request, "network/index.html", {
-                "posts": posts
+                "posts": posts,
+                "all": True
             })
+    else:
+        return render(request, "network/login.html")
+
+def following_view(request):
+    # Show posts from people user is following
+    if request.user.is_authenticated:
+        user = request.user
+        following = User_Followers.objects.filter(follower=user)
+        posts = []
+        for follower in following:
+            for post in Posts.objects.filter(user=follower.user):
+                posts.append(post)
+        # Order posts by date
+        posts = sorted(posts, key=lambda post: post.date, reverse=True)
+        print(following)
+        print("posts",  posts)
+        return render(request, "network/index.html",  {
+            "posts": posts
+        })
     else:
         return render(request, "network/login.html")
     
 def profile(request, username):
-    user = User.objects.get(username=username)
-    posts = Posts.objects.filter(user=user).order_by("-date")
-    followers_count = User_Followers.objects.filter(user=user).count()
-    following_count = User_Followers.objects.filter(follower=user).count()
-    # Check if user on own profile
-    if request.user == user:
-        my_profile = True
-        is_following = False
-    else:
-        my_profile = False
-        # check if user is following
-        if User_Followers.objects.filter(user=user, follower=request.user).count() > 0:
-            is_following = True
-        else:
+    # Show user profile
+    if request.user.is_authenticated:
+        user = User.objects.get(username=username)
+        posts = Posts.objects.filter(user=user).order_by("-date")
+        followers_count = User_Followers.objects.filter(user=user).count()
+        following_count = User_Followers.objects.filter(follower=user).count()
+        # Check if user on own profile
+        if request.user == user:
+            my_profile = True
             is_following = False
-    
-    return render(request, "network/profile.html", {
-        "profile_user": user,
-        "posts": posts,
-        "followers_count": followers_count,
-        "following_count": following_count,
-        "my_profile": my_profile,
-        "is_following": is_following
-    })
+        else:
+            my_profile = False
+            # check if user is following
+            if User_Followers.objects.filter(user=user, follower=request.user).count() > 0:
+                is_following = True
+            else:
+                is_following = False
+        
+        return render(request, "network/profile.html", {
+            "profile_user": user,
+            "posts": posts,
+            "followers_count": followers_count,
+            "following_count": following_count,
+            "my_profile": my_profile,
+            "is_following": is_following
+        })
+    else:
+        return render(request, "network/login.html")
 
 def followers(request, username):
+    # Show followers of user
     user = User.objects.get(username=username)
     followers = User_Followers.objects.filter(user=user)
     return render(request, "network/followers.html", {
@@ -64,6 +90,7 @@ def followers(request, username):
     })
 
 def following(request, username):
+    # Show following of user
     user = User.objects.get(username=username)
     following = User_Followers.objects.filter(follower=user)
     return render(request, "network/following.html", {
@@ -73,15 +100,14 @@ def following(request, username):
 
 @csrf_exempt
 def follow(request, username):
+    # Follow or unfollow user
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
     else:
         user = User.objects.get(username=username)
         if request.user == user:
             return JsonResponse({"error": "Cannot follow self."}, status=400)
-        print("user", user)
         follower = request.user
-        print("follower", follower)
         if User_Followers.objects.filter(user=user, follower=follower).count() == 0:
             new_follower = User_Followers.objects.create(user=user, follower=follower)
             new_follower.save()
