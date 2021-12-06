@@ -26,7 +26,7 @@
 {% for post in posts%}
 <div class="post">
   <a href="{% url 'profile' post.user.username %}"><div class="username">{{post.user.username}}</div></a>
-  <div class="content">{{post.content}}</div>
+  <div class="content" id="content-{{post.id}}">{{post.content}}</div>
   <div id="likeIcon">
     <span>
       <svg
@@ -46,7 +46,7 @@
   </div>
   <small>{{post.date}}</small>
   {% if post.user.username == user.username %}
-  <div id="edit">Edit</div>
+  <div class="edit" data-id="{{post.id}}">Edit</div>
   {% endif %}
 </div>
 {%endfor%}

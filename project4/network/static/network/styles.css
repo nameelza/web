@@ -89,11 +89,15 @@ small {
     color: rgb(172, 172, 172);
 }
 
-#edit {
+.edit, .save {
     font-size: 14px;
 }
 
-#edit:hover {
+.save {
+    color: green;
+}
+
+.edit:hover, .save:hover {
     cursor: pointer;
     text-decoration: underline;
 }
