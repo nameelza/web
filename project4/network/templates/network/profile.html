@@ -26,8 +26,7 @@
 {% for post in posts%}
     <div class="post">
         <div class="username">{{post.user.username}}</div>
-        <h6>{{post.content}}</h6>
-        <small>{{post.date}}</small>
+        <div class="content">{{post.content}}</div>
         <div id="likeIcon">
             <span>
             <svg
@@ -45,6 +44,10 @@
             {{post.likesCount}}
             </span>
         </div>
+        <small>{{post.date}}</small>
+        {% if post.user.username == user.username %}
+        <div id="edit">Edit</div>
+        {% endif %}
     </div>
 {%endfor%}
 <!-- if no posts yet, show message -->
@@ -55,4 +58,5 @@
     </div>
 {% endif %}
 <script src="/static/network/index.js"></script>
+<script src="/static/network/edit.js"></script>
 {% endblock %}

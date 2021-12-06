@@ -12,7 +12,7 @@
           placeholder="What's up?"
           name="content"
           class="form-control w-100"
-          maxlength="200"
+          maxlength="300"
         ></textarea>
       </div>
       <input class="btn btn-primary" type="submit" value="Post" />
@@ -23,12 +23,10 @@
   <hr />
 {% endif %}
 
-
 {% for post in posts%}
 <div class="post">
   <a href="{% url 'profile' post.user.username %}"><div class="username">{{post.user.username}}</div></a>
-  <h6>{{post.content}}</h6>
-  <small>{{post.date}}</small>
+  <div class="content">{{post.content}}</div>
   <div id="likeIcon">
     <span>
       <svg
@@ -46,7 +44,12 @@
       {{post.likesCount}}
     </span>
   </div>
+  <small>{{post.date}}</small>
+  {% if post.user.username == user.username %}
+  <div id="edit">Edit</div>
+  {% endif %}
 </div>
 {%endfor%}
+<script src="/static/network/edit.js"></script>
 {% endblock %}
 

@@ -22,7 +22,7 @@
 }
 
 .followersCount:not(:last-child) {
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 .followersNumber {
@@ -31,7 +31,7 @@
 }
 
 .profileUsername {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -45,6 +45,13 @@
     background-color: white;
 }
 
+.followButton:hover {
+    background-color: #f1f1f1;
+}
+
+.followButton:focus {
+    outline: none;
+}
 
 .username {
     font-size: 16px;
@@ -56,7 +63,8 @@
     max-height: fit-content;
     border: 1px solid #ccc;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 15px;
+    margin-top: 10px;;
 }
 
 .post:not(:last-child) {
@@ -69,4 +77,23 @@ textarea {
 
 svg {
     margin-bottom: 2px;
+}
+
+.content {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+small {
+    font-size: 12px;
+    color: rgb(172, 172, 172);
+}
+
+#edit {
+    font-size: 14px;
+}
+
+#edit:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
