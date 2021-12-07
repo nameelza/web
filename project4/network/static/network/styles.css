@@ -39,7 +39,7 @@
 .followButton {
     margin: 10px 0;
     border: black solid 1px;
-    border-radius: 12px;
+    border-radius: 4px;
     padding: 2px 10px;
     font-weight: bold;
     background-color: white;
@@ -100,4 +100,21 @@ small {
 .edit:hover, .save:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.followersFollowing {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.followersFollowing a {
+    color: #a8a8a8;
+}
+
+.userList a {
+    color: black;
+    font-size: 24px;
 }

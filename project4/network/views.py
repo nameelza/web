@@ -6,6 +6,7 @@ from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
 from .models import User, Posts, User_Followers
 
@@ -24,9 +25,13 @@ def index(request):
             for post in posts:
                 post.likesCount = post.likers.count()
                 post.save()
+            # Paginate posts
+            paginator = Paginator(posts, 10)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
             return render(request, "network/index.html", {
-                "posts": posts,
-                "all": True
+                "all": True,
+                "page_obj": page_obj
             })
     else:
         return render(request, "network/login.html")
@@ -42,10 +47,11 @@ def following_view(request):
                 posts.append(post)
         # Order posts by date
         posts = sorted(posts, key=lambda post: post.date, reverse=True)
-        print(following)
-        print("posts",  posts)
+        paginator = Paginator(posts, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         return render(request, "network/index.html",  {
-            "posts": posts
+            "page_obj": page_obj,
         })
     else:
         return render(request, "network/login.html")
@@ -68,10 +74,13 @@ def profile(request, username):
                 is_following = True
             else:
                 is_following = False
+        paginator = Paginator(posts, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         
         return render(request, "network/profile.html", {
             "profile_user": user,
-            "posts": posts,
+            "page_obj": page_obj,
             "followers_count": followers_count,
             "following_count": following_count,
             "my_profile": my_profile,
@@ -115,6 +124,28 @@ def follow(request, username):
         else:
             User_Followers.objects.filter(user=user, follower=follower).delete()
         return HttpResponse(status=204)
+
+@csrf_exempt
+def edit(request):
+    # Edit post content
+    if request.method == "PUT":
+        # Get data from request
+        data = json.loads(request.body)
+        id = data["post_id"]
+        new_content = data["content"]
+        post = Posts.objects.get(id=id)
+        # Check if user is owner of post
+        if post.user == request.user:
+            # Update post content
+            post.content = new_content
+            post.save()
+            return HttpResponse(status=204)
+        else:
+            return JsonResponse({"error": "You cannot edit this post."}, status=400)
+    else:
+        return JsonResponse({"error": "POST request required."}, status=400)
+        
+
         
 
 def login_view(request):

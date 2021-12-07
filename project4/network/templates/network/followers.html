@@ -1,15 +1,23 @@
 {% extends "network/layout.html" %}
 
 {% block body %}
-<div>
+<div class="profileUsername"> 
     {{profile_user.username}}
 </div>
 <div>
-    <a href="{% url 'following' profile_user.username %}">Following</a>
-    Followers:
+    <div class="followersFollowing">
+        <a href="{% url 'following' profile_user.username %}">Following</a>
+        Followers
+    </div>
+    <hr /> 
     {% for follower in followers %}
+    <div class="userList">
         <a href="{% url 'profile' follower.follower.username %}">{{follower.follower.username}}</a>
+    </div>
     {% endfor %}
+    {% if not followers %}
+        <p>No followers yet</p>
+    {% endif %}
 </div>
 
 {% endblock %}
