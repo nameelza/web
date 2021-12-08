@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
       area.value = content.innerHTML;
 
       // Replace content with textarea
-      console.log(content);
       content.replaceWith(area);
 
       // Add save button

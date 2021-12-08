@@ -118,3 +118,7 @@ small {
     color: black;
     font-size: 24px;
 }
+
+.like_button:hover {
+    cursor: pointer;
+}

@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM loaded with JavaScript');
     const followButton = document.querySelector('.followButton')
     const followersCount = document.querySelector('#followersCount')
     followButton.addEventListener('click', () => {

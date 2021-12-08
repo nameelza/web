@@ -120,10 +120,31 @@ def follow(request, username):
         if User_Followers.objects.filter(user=user, follower=follower).count() == 0:
             new_follower = User_Followers.objects.create(user=user, follower=follower)
             new_follower.save()
-            print(new_follower)
         else:
             User_Followers.objects.filter(user=user, follower=follower).delete()
         return HttpResponse(status=204)
+
+@csrf_exempt
+def like(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+    else:
+        user = request.user
+        # Get data from request
+        data = json.loads(request.body)
+        id = data["post_id"]
+        post = Posts.objects.get(id=id)
+        if user in post.likers.all():
+            # remove like
+            post.likers.remove(user)
+            post.save()
+            return HttpResponse(status=204)
+        else:
+            # add like
+            post.likers.add(user)
+            post.save()
+            return HttpResponse(status=204)
+
 
 @csrf_exempt
 def edit(request):
