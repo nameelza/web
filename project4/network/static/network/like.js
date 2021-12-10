@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     likeButton = document.querySelectorAll(".like_button")
     likeButton.forEach((element) => {
         element.addEventListener("click", () => {
+            console.log('LikeJS')
             const id = element.getAttribute("data-id");
             let likesCount = document.querySelector(`#likes-${id}`);
             if (element.className == "like_button bi bi-heart-fill") {

@@ -1,6 +1,6 @@
 import json
 from django.contrib.auth import authenticate, login, logout
-from django.db import IntegrityError
+from django.db import IntegrityError, connections
 from django.http import HttpResponse, HttpResponseRedirect
 from django.http.response import JsonResponse
 from django.shortcuts import render
@@ -74,6 +74,11 @@ def profile(request, username):
                 is_following = True
             else:
                 is_following = False
+        # Update likes count
+        for post in posts:
+            post.likesCount = post.likers.count()
+            post.save()
+        # Paginate posts
         paginator = Paginator(posts, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
@@ -126,6 +131,7 @@ def follow(request, username):
 
 @csrf_exempt
 def like(request):
+    print('Like py')
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
     else:
