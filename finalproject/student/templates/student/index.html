@@ -2,4 +2,13 @@
 
 {% block title %} Student Rentals {%endblock%}
 
-{% block body %} Hello, student! {% endblock %}
+{% block body %}
+<div class="index-content">
+    Find a perfect place for your college experience
+</div>
+<form class="search" method="POST" action="{% url 'list_results' %}">
+    {% csrf_token %}
+    <input type="search" placeholder="Search by city or college name">
+    <button type="submit">Search</button>
+</form>
+{% endblock %}
