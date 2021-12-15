@@ -1,110 +1,160 @@
-{% extends "student/layout.html" %} 
-
-{% block title %} Queen room with shared bathroom {%endblock%}
-
-{% block body %}
-<div class="results-heading">
-    Queen room with shared bathroom
-</div>
-<div class="small">
-    Private room • San Francisco, California
-</div>
+{% extends "student/layout.html" %} {% block title %} Queen room with shared
+bathroom {%endblock%} {% block body %}
+<div class="results-heading">Queen room with shared bathroom</div>
+<div class="small">Private room • San Francisco, California</div>
 <div class="image-gallery">
-    <div class="image-container">
-        <img src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440" alt="Queen room with shared bathroom" id="expandedImage">
+  <div class="image-container">
+      <img
+      src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440"
+      alt="Queen room with shared bathroom"
+      id="expandedImage"
+    />
+  </div>
+  <div class="images-column">
+    <div class="image-single">
+      <img
+        src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440"
+        alt="Queen room with shared bathroom"
+        id="smallImage"
+      />
     </div>
-    <div class="images-column">
-        <div class="image-single">
-            <img src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440" alt="Queen room with shared bathroom" id="smallImage" >
-        </div>
-        <div class="image-single">
-            <img src="https://a0.muscache.com/im/pictures/edfcad9c-fe04-4bb2-a712-6ae253dfd461.jpg?im_w=1440" alt="Queen room with shared bathroom" id="smallImage" >
-        </div>
-        <div class="image-single">
-            <img src="https://a0.muscache.com/im/pictures/a68d42e0-2e19-4c74-83c9-a5846df08843.jpg?im_w=1440" alt="Queen room with shared bathroom" id="smallImage">
-        </div>
-        <div class="image-single">
-            <img src="https://a0.muscache.com/im/pictures/7cbd13f3-a6a8-4b71-b1e7-3f9c9f6aaa55.jpg?im_w=1440" alt="Queen room with shared bathroom" id="smallImage">
-        </div>
+    <div class="image-single">
+      <img
+        src="https://a0.muscache.com/im/pictures/edfcad9c-fe04-4bb2-a712-6ae253dfd461.jpg?im_w=1440"
+        alt="Queen room with shared bathroom"
+        id="smallImage"
+      />
     </div>
+    <div class="image-single">
+      <img
+        src="https://a0.muscache.com/im/pictures/a68d42e0-2e19-4c74-83c9-a5846df08843.jpg?im_w=1440"
+        alt="Queen room with shared bathroom"
+        id="smallImage"
+      />
+    </div>
+    <div class="image-single">
+      <img
+        src="https://a0.muscache.com/im/pictures/7cbd13f3-a6a8-4b71-b1e7-3f9c9f6aaa55.jpg?im_w=1440"
+        alt="Queen room with shared bathroom"
+        id="smallImage"
+      />
+    </div>
+  </div>
 </div>
 
 <div class="rental-content">
-    <div class="rental-content-info">
-        <div class="big" id="rental-big">Property details</div>
-        <div class="info">The Dorel is your perfect escape from the hustle and bustle of city life. Newly remodeled in 2019, our partially furnished efficiency units were built with your comfort in mind with the necessities needed to settle into urban life including a private bathroom, full or double Murphy beds, sofa, microwave and mini-fridge. The building features a gourmet community kitchen, an outdoor patio deck, on-site laundry and high-speed Wi-Fi.</div>
-        <hr>
-        <div class="big" id="rental-big">Facilities</div>
-        <ul class="amenities">
-            <li class="small">Wifi</li>
-            <li class="small">Kitchen</li>
-            <li class="small">Washer</li>
-            <li class="small">Bike storage</li>
-        </ul>
-        <div class="big" id="rental-big">Security & Safety</div>
-        <div id="included">
-            <ul class="amenities">
-                <li class="small">CCTV / Surveillance Cameras</li>
-            </ul>
-        </div>
-        <div id="notIncluded">
-            <ul class="amenities">
-                <li class="small">Controlled Access Gate</li>
-            </ul>
-        </div>
-        <div class="big" id="rental-big">Bills included</div>
-        <div id="included">
-            <ul class="amenities">
-                <li class="small">Wifi</li>
-                <li class="small">Water</li>
-            </ul>
-        </div>
-        <div id="notIncluded">
-            <ul class="amenities">
-                <li class="small">Gas</li>
-                <li class="small">Electricity</li>
-                <li class="small">Heating</li>
-            </ul>
-        </div>
+  <div class="rental-content-info">
+    <div class="big" id="rental-big">Property details</div>
+    <div class="info">
+      The Dorel is your perfect escape from the hustle and bustle of city life.
+      Newly remodeled in 2019, our partially furnished efficiency units were
+      built with your comfort in mind with the necessities needed to settle into
+      urban life including a private bathroom, full or double Murphy beds, sofa,
+      microwave and mini-fridge. The building features a gourmet community
+      kitchen, an outdoor patio deck, on-site laundry and high-speed Wi-Fi.
     </div>
-    <div class="rental-book">
-        <div class="price">
-            <span id="price">$650</span>
-            <span>/ month</span>
-        </div>
-        <div class="book-form">
-            <form action="">
-                <div class="form-group">
-                    <label for="name">Full name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone number</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
-                </div>
-                <div class="form-group">
-                    <label for="checkin">Check-in</label>
-                    <input type="date" class="form-control" id="checkin" placeholder="Enter check-in date">
-                </div>
-                <div class="form-group">
-                    <label for="checkout">Check-out</label>
-                    <input type="date" class="form-control" id="checkout" placeholder="Enter check-out date">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea class="form-control" id="message" rows="3" placeholder="Enter message"></textarea>
-                </div>
-                <button type="submit" id="button-rental">Make enquiry</button>
-            </form>
-        </div>
+    <hr />
+    <div class="big" id="rental-big">Facilities</div>
+    <ul class="amenities">
+      <li class="small">Wifi</li>
+      <li class="small">Kitchen</li>
+      <li class="small">Washer</li>
+      <li class="small">Bike storage</li>
+    </ul>
+    <div class="big" id="rental-big">Security & Safety</div>
+    <div id="included">
+      <ul class="amenities">
+        <li class="small">CCTV / Surveillance Cameras</li>
+      </ul>
     </div>
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">Controlled Access Gate</li>
+      </ul>
+    </div>
+    <div class="big" id="rental-big">Bills included</div>
+    <div id="included">
+      <ul class="amenities">
+        <li class="small">Wifi</li>
+        <li class="small">Water</li>
+      </ul>
+    </div>
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">Gas</li>
+        <li class="small">Electricity</li>
+        <li class="small">Heating</li>
+      </ul>
+    </div>
+    <div class="big" id="rental-big">Address</div>
+    <a href="https://www.google.com/maps/place/8+10th+St,+San+Francisco,+CA+94103/@37.7761435,-122.4196172,17z/data=!3m1!4b1!4m5!3m4!1s0x8085809c396a98e3:0x6804142df53695e9!8m2!3d37.7761393!4d-122.4174285?hl=en" class="small" target="_blank" rel="noopener noreferrer">8 10th St, San Francisco, 94103</a>
+  </div>
+  <div class="rental-book">
+    <div class="price">
+      <span id="price">$650</span>
+      <span>/ month</span>
+    </div>
+    <div class="book-form">
+      <form action="">
+        <div class="form-group">
+          <label for="name">Full name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            placeholder="Enter phone number"
+          />
+        </div>
+        <div class="form-group">
+          <label for="checkin">Check-in</label>
+          <input
+            type="date"
+            class="form-control"
+            id="checkin"
+            placeholder="Enter check-in date"
+          />
+        </div>
+        <div class="form-group">
+          <label for="checkout">Check-out</label>
+          <input
+            type="date"
+            class="form-control"
+            id="checkout"
+            placeholder="Enter check-out date"
+          />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            rows="3"
+            placeholder="Enter message"
+          ></textarea>
+        </div>
+        <button type="submit" id="button-rental">Make enquiry</button>
+      </form>
+    </div>
+  </div>
 </div>
-
-
 
 <script src="/static/student/image.js"></script>
 {% endblock %}

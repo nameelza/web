@@ -41,9 +41,13 @@ a {
   text-decoration: none;
 }
 
-li a:hover {
+a:hover {
   color: #000;
   text-decoration: underline;
+}
+
+.results-list a:hover{
+  text-decoration: none;
 }
 
 li:not(:last-child) {
@@ -301,3 +305,6 @@ hr {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+/* Profile page */
+
