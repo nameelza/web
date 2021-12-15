@@ -4,5 +4,56 @@
 
 {% block body %}
 <div class="results-heading">Hello, Liza!</div>
-<hr>
+<div class="profile-links">
+    <a class="profile-big" id="profile-enquiries">Your enquiries</a>
+    <a class="profile-big" id="profile-properties">Your properties</a>
+    <a class="profile-big" id="profile-edit">Edit profile</a>
+</div>
+<div class="profile-links-content" id="enquiries">
+    <hr>
+    <a href="{% url 'rental' %}" class="result">
+        <div class="result-image">
+            <img src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=720" alt="image of the property">
+        </div>
+        <div class="result-content">
+            <div class="small">Private room</div>
+            <div class="big">Queen room with shared bathroom</div>
+            <hr class="hr-result">
+            <ul class="amenities">
+                <li class="small">Wifi</li>
+                <li class="small">Washer</li>
+                <li class="small">Kitchen</li>
+                <li class="small">Bike storage</li>
+            </ul>
+            <div class="price">
+                <span id="price">$980</span>
+                <span>/ month</span>
+            </div>
+        </div>
+    </a>
+    <button class="button-profile">Declined</button>
+    <hr>
+    <a href="{% url 'rental' %}" class="result">
+        <div class="result-image">
+            <img src="https://image.student.com/max_1250x700/3519773e-65e8-11e9-ad90-0e62a2ece8f8-fe27d0d49d0242f2af85a656a694433e.jpg" alt="image of the property">
+        </div>
+        <div class="result-content">
+            <div class="small">Private room</div>
+            <div class="big">One spacious, cozy private room and bathroom</div>
+            <hr class="hr-result">
+            <ul class="amenities">
+                <li class="small">Wifi</li>
+                <li class="small">Kitchen</li>
+                <li class="small">Bike storage</li>
+            </ul>
+            <div class="price">
+                <span id="price">$1250</span>
+                <span>/ month</span>
+            </div>
+        </div>
+    </a>
+    <button class="button-profile" style="background-color: #4beb23;">Approved</button>
+</div>
+
+<script src="/static/student/profile.js"></script>
 {% endblock %}

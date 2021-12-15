@@ -1,10 +1,10 @@
 {% extends "student/layout.html" %} {% block title %} Queen room with shared
 bathroom {%endblock%} {% block body %}
 <div class="results-heading">Queen room with shared bathroom</div>
-<div class="small">Private room • San Francisco, California</div>
+<div class="small">Private room • San Francisco</div>
 <div class="image-gallery">
   <div class="image-container">
-      <img
+    <img
       src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440"
       alt="Queen room with shared bathroom"
       id="expandedImage"
@@ -53,6 +53,14 @@ bathroom {%endblock%} {% block body %}
       microwave and mini-fridge. The building features a gourmet community
       kitchen, an outdoor patio deck, on-site laundry and high-speed Wi-Fi.
     </div>
+    <div class="big" id="rental-big">Address</div>
+    <a
+      href="https://www.google.com/maps/place/8+10th+St,+San+Francisco,+CA+94103/@37.7761435,-122.4196172,17z/data=!3m1!4b1!4m5!3m4!1s0x8085809c396a98e3:0x6804142df53695e9!8m2!3d37.7761393!4d-122.4174285?hl=en"
+      class="small"
+      target="_blank"
+      rel="noopener noreferrer"
+      >8 10th St, San Francisco, 94103</a
+    >
     <hr />
     <div class="big" id="rental-big">Facilities</div>
     <ul class="amenities">
@@ -86,12 +94,10 @@ bathroom {%endblock%} {% block body %}
         <li class="small">Heating</li>
       </ul>
     </div>
-    <div class="big" id="rental-big">Address</div>
-    <a href="https://www.google.com/maps/place/8+10th+St,+San+Francisco,+CA+94103/@37.7761435,-122.4196172,17z/data=!3m1!4b1!4m5!3m4!1s0x8085809c396a98e3:0x6804142df53695e9!8m2!3d37.7761393!4d-122.4174285?hl=en" class="small" target="_blank" rel="noopener noreferrer">8 10th St, San Francisco, 94103</a>
   </div>
   <div class="rental-book">
     <div class="price">
-      <span id="price">$650</span>
+      <span id="price">$980</span>
       <span>/ month</span>
     </div>
     <div class="book-form">
@@ -121,24 +127,6 @@ bathroom {%endblock%} {% block body %}
             class="form-control"
             id="phone"
             placeholder="Enter phone number"
-          />
-        </div>
-        <div class="form-group">
-          <label for="checkin">Check-in</label>
-          <input
-            type="date"
-            class="form-control"
-            id="checkin"
-            placeholder="Enter check-in date"
-          />
-        </div>
-        <div class="form-group">
-          <label for="checkout">Check-out</label>
-          <input
-            type="date"
-            class="form-control"
-            id="checkout"
-            placeholder="Enter check-out date"
           />
         </div>
         <div class="form-group">
