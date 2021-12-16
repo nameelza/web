@@ -404,7 +404,21 @@ hr {
   width: fit-content;
 }
 
+.input-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-group input:first-child {
+  margin-right: 10px;
+}
+
+.input-group input[type="submit"]:hover {
+  cursor: pointer;
+}
+
 /* Create page */
+
 .form-group {
   margin: 10px 0 20px 0;
 }
