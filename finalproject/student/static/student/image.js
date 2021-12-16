@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM loaded');
     const image = document.querySelectorAll('#smallImage');
-    console.log(image);
         image.forEach((image) => {
             image.addEventListener('click', function () {
                 // Get the expanded image

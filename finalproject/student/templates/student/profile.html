@@ -31,7 +31,7 @@
             </div>
         </div>
     </a>
-    <button class="button-profile">Declined</button>
+    <div class="rental-approval" style="background-color: #ff385c;">Declined</div>
     <hr>
     <a href="{% url 'rental' %}" class="result">
         <div class="result-image">
@@ -52,7 +52,18 @@
             </div>
         </div>
     </a>
-    <button class="button-profile" style="background-color: #4beb23;">Approved</button>
+    <div class="rental-approval" style="background-color: #ebcd23;" disabled>Pending</div>
+</div>
+<div class="profile-links-content" id="properties">
+    You don't have any properties yet.
+</div>
+<div class="profile-links-content" id="edit">
+    <label for="first_name">First name</label>
+    <input type="text" name="first_name" id="first_name" value="Liza">
+    <label for="last_name">Last name</label>
+    <input type="text" name="last_name" id="last_name" value="Lopez">
+    <label for="email">Email</label>
+    <input type="text" name="email" id="email" value="liza@gmail.com">
 </div>
 
 <script src="/static/student/profile.js"></script>
