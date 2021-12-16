@@ -4,7 +4,6 @@
 
 {% block body %}
 <div class="index-content">
-    <div class="small">Rent a place for your 2022-2023 college year in San Francisco&Bay Area</div>
     Find a perfect place for your college experience
 </div>
 
@@ -13,6 +12,14 @@
     <input type="search" placeholder="Search by city">
     <button type="submit">Search</button>
 </form>
-<a href="{% url 'list_results' %}" class="explore-all">Explore all</a>
+<div class="explore-all">
+    <div class="explore-or">OR</div>
+    <a class="explore-all-button" href="{% url 'list_results' %}" >Explore all</a>
+</div>
 
+
+
+<footer>
+    <div class="small">Rent a place for your 2022-2023 college year in San Francisco&Bay Area</div>
+</footer>
 {% endblock %}

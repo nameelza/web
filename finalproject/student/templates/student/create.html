@@ -3,4 +3,77 @@
 {% block title %} Become a host {%endblock%}
 
 {% block body %}
+<div class="results-heading">
+    Add your property
+</div>
+<hr>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" name="title" placeholder="Title" class="form-control"  id="title" required />
+    </div>
+    <div class="form-group">
+        <textarea name="description" placeholder="Description/Property details" class="form-control" id="description" required></textarea>
+    </div>
+    <div class="form-group">
+        <input type="number" name="price" placeholder="$ Price per month" class="form-control" id="form-price" min="0" step="1" required/>
+    </div>
+    <div class="form-group">
+        <input type="text" name="form-address" placeholder="Address" class="form-control" id="form-address" required/>
+    </div>
+    <div class="form-group">
+        <select class="form-control w-25" name="category" id="category" class="form-control" required>
+            <option value="" disabled selected>Select Category</option>
+            <option value="1">Entire place</option>
+            <option value="2">Private room</option>
+            <option value="3">Shared room</option>
+        </select>
+    </div>
+    <label for="form-select" class="form-label">Choose amenitites</label>
+    <div class="form-select">
+        <input type="checkbox" id="wifi" name="wifi" value="wifi">
+        <label for="wifi"> Wifi</label><br>
+        <input type="checkbox" id="kitchen" name="kitchen" value="kitchen">
+        <label for="kitchen"> Kitchen</label><br>
+        <input type="checkbox" id="washer" name="washer" value="washer">
+        <label for="washer">Washer</label><br>
+        <input type="checkbox" id="gym" name="gym" value="gym">
+        <label for="gym">Gym</label><br>
+        <input type="checkbox" id="bike" name="bike" value="bike">
+        <label for="bike">Bike storage</label><br>
+    </div>
+    <label for="form-select" class="form-label">Choose security&safety</label>
+    <div class="form-select">
+        <input type="checkbox" id="cctv" name="cctv" value="cctv">
+        <label for="cctv">CCTV / Surveillance Cameras</label><br>
+        <input type="checkbox" id="gate" name="gate" value="gate">
+        <label for="gate">Controlled Access Gate</label><br>
+    </div>
+    <label for="form-select" class="form-label">Choose covered bills</label>
+    <div class="form-select">
+        <input type="checkbox" id="wifi-bill" name="wifi-bill" value="wifi-bill">
+        <label for="wifi-bill">Wifi</label><br>
+        <input type="checkbox" id="water" name="water" value="water">
+        <label for="water">Water</label><br>
+        <input type="checkbox" id="gas" name="gas" value="gas">
+        <label for="gas">Gas</label><br>
+        <input type="checkbox" id="electricity" name="electricity" value="electricity">
+        <label for="electricity">Electricity</label><br>
+        <input type="checkbox" id="heating" name="heating" value="heating">
+        <label for="heating">Heating</label><br>
+    </div>
+    <div class="form-group">
+        <input type="text" name="image" placeholder="Fisrt Image URL" class="form-control w-25" id="image" required/>
+    </div>
+    <div class="form-group">
+        <input type="text" name="image" placeholder="Second Image URL" class="form-control w-25" id="image" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="image" placeholder="Third Image URL" class="form-control w-25" id="image" />
+    </div>
+    <div class="form-group">
+        <input type="text" name="image" placeholder="Last Image URL" class="form-control w-25" id="image" />
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
 {% endblock %}
