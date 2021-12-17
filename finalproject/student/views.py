@@ -9,20 +9,26 @@ from .models import *
 
 # Create your views here.
 
+
 def index(request):
     return render(request, 'student/index.html')
+
 
 def list_results(request):
     return render(request, 'student/results.html')
 
+
 def rental(request):
     return render(request, 'student/rental.html')
+
 
 def profile(request):
     return render(request, 'student/profile.html')
 
+
 def create(request):
     return render(request, 'student/create.html')
+
 
 def login_view(request):
     if request.method == "POST":
@@ -53,8 +59,6 @@ def register(request):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-        print(username)
-        print(email)
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -68,7 +72,6 @@ def register(request):
         try:
             user = User.objects.create_user(username, email, password)
             user.save()
-            print("user", user)
         except IntegrityError:
             return render(request, "student/register.html", {
                 "message": "Username already taken."
