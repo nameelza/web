@@ -2,33 +2,40 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- This sets the width of the page to follow the screen-width of the device and zoom out to fit -->
-        <link href="{% static 'student/styles.css' %}" rel="stylesheet">
-        <title>{% block title %}{% endblock %}</title>
-    </head>
-    <body>
-        <nav class="navbar">
-            <div class="navbar-brand">Bay Area Student Rentals</div>
-            <ul class="navbar-list">
-                <li>
-                    <a href="{% url 'index' %}">Home</a>
-                </li>
-                <li>
-                    <a href="{% url 'profile' %}">Profile</a>
-                </li>
-                <li>
-                    <a href="{% url 'create' %}">Become a host</a>
-                </li>
-                <li>
-                    <a href="#">Log out</a>
-                </li>
-            </ul>
-        </nav>
-        <main>
-        {% block body %}
-        {% endblock %}
-        </main>
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- This sets the width of the page to follow the screen-width of the device and zoom out to fit -->
+    <link href="{% static 'student/styles.css' %}" rel="stylesheet" />
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-brand">Bay Area Student Rentals</div>
+      <ul class="navbar-list">
+        <li>
+          <a href="{% url 'index' %}">Home</a>
+        </li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'profile' %}">Profile</a>
+        </li>
+        <li>
+          <a href="{% url 'create' %}">Become a host</a>
+        </li>
+        <li>
+          <a href="{% url 'logout' %}">Log out</a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'register' %}">Register</a>
+        </li>
+        <li>
+          <a href="{% url 'login' %}">Log in</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <main>{% block body %} {% endblock %}</main>
+  </body>
 </html>
