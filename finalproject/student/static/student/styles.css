@@ -423,6 +423,16 @@ hr {
   margin: 10px 0 20px 0;
 }
 
+.form-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#form-price {
+  margin: 0 10px 0 10px;
+}
+
 .form-select  {
   display: flex;
   flex-direction: row;

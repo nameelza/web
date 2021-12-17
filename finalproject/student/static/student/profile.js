@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('DOM loaded');
+    // Change between links
     const enquiryButton = document.getElementById('profile-enquiries');
     const propertyButton = document.getElementById('profile-properties');
     const editButton = document.getElementById('profile-edit');

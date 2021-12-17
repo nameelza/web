@@ -9,9 +9,6 @@ def index(request):
 def list_results(request):
     return render(request, 'student/results.html')
 
-def map_results(request):
-    return render(request, 'student/map.html')
-
 def rental(request):
     return render(request, 'student/rental.html')
 

@@ -16,7 +16,11 @@
         <textarea name="description" placeholder="Description/Property details" class="form-control" id="description" required></textarea>
     </div>
     <div class="form-group">
-        <input type="number" name="price" placeholder="$ Price per month" class="form-control" id="form-price" min="0" step="1" required/>
+        <div class="form-price">
+            <span>$</span>
+            <input type="number" name="price" placeholder="Price" class="form-control" id="form-price" min="0" step="1" required/>
+            <span>/ month</span>
+        </div>
     </div>
     <div class="form-group">
         <input type="text" name="form-address" placeholder="Address" class="form-control" id="form-address" required/>
