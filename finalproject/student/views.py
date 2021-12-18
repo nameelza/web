@@ -4,10 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.db import IntegrityError
-
 from .models import *
-
-# Create your views here.
 
 
 def index(request):
