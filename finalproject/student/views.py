@@ -37,17 +37,23 @@ def create(request):
         image2 = request.POST['image2']
         image3 = request.POST['image3']
         image4 = request.POST['image4']
-        print("user", user)
-        print("title", title)
-        print("description", description)
-        print("price", price)
-        print("city", city)
-        print("address", address)
-        print("place", place)
-        print("image1", image1)
-        print("image2", image2)
-        print("image3", image3)
-        print("image4", image4)
+        new_property = Property(user=user, title=title, description=description, price=price, city=city, address=address, place=place, image1=image1, image2=image2, image3=image3, image4=image4)
+        new_property.save()
+        wifi = request.POST.get('wifi', False)
+        kitchen = request.POST.get('kitchen', False)
+        washer = request.POST.get('washer', False)
+        gym = request.POST.get('gym', False)
+        bike = request.POST.get('bike', False)
+        parking = request.POST.get('parking', False)
+        cctv = request.POST.get('cctv', False)
+        gate = request.POST.get('gate', False)
+        wifi_bill = request.POST.get('wifi-bill', False)
+        water = request.POST.get('water', False)
+        electricity = request.POST.get('electricity', False)
+        gas = request.POST.get('gas', False)
+        heating = request.POST.get('heating', False)
+        amenities = Amenities(property=new_property, wifi=wifi=='wifi', kitchen=kitchen=='kitchen', washer=washer=='washer', gym=gym=='gym', bike=bike=='bike', parking=parking=='parking', cctv=cctv=='cctv', gate=gate=='gate', wifi_bill=wifi_bill=='wifi-bill', water_bill=water=='water', electricity_bill=electricity=='electricity', gas_bill=gas=='gas', heating_bill=heating=='heating')
+        amenities.save()
         pass
     else:
         city_category = Property.CITY_CHOICES
