@@ -24,7 +24,38 @@ def profile(request):
 
 
 def create(request):
-    return render(request, 'student/create.html')
+    if request.method == "POST":
+        # Create new property
+        user = request.user
+        title = request.POST['title']
+        description = request.POST['description']
+        price = request.POST['price']
+        city = request.POST['city']
+        address = request.POST['form-address']
+        place = request.POST['place_category']
+        image1 = request.POST['image1']
+        image2 = request.POST['image2']
+        image3 = request.POST['image3']
+        image4 = request.POST['image4']
+        print("user", user)
+        print("title", title)
+        print("description", description)
+        print("price", price)
+        print("city", city)
+        print("address", address)
+        print("place", place)
+        print("image1", image1)
+        print("image2", image2)
+        print("image3", image3)
+        print("image4", image4)
+        pass
+    else:
+        city_category = Property.CITY_CHOICES
+        place_category = Property.PLACE_CHOICES
+        return render(request, 'student/create.html', {
+            'city_category': city_category,
+            'place_category': place_category
+        })
 
 
 def login_view(request):

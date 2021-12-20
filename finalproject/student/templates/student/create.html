@@ -7,7 +7,7 @@
     Add your property
 </div>
 <hr>
-<form action="" method="POST">
+<form action="{% url 'create' %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
         <input type="text" name="title" placeholder="Title" class="form-control"  id="title" required />
@@ -29,7 +29,7 @@
         <input type="text" name="form-address" placeholder="Address" class="form-control" id="form-address" required/>
     </div>
     <div class="form-group">
-        <select class="form-control w-25" name="category" id="category" class="form-control" required>
+        <select class="form-control w-25" name="place_category" id="category" class="form-control" required>
             <option value="" disabled selected>Select Category</option>
             <option value="1">Entire place</option>
             <option value="2">Private room</option>
@@ -70,16 +70,16 @@
         <label for="heating">Heating</label><br>
     </div>
     <div class="form-group">
-        <input type="text" name="image" placeholder="Fisrt Image URL" class="form-control w-25" id="image" required/>
+        <input type="text" name="image1" placeholder="Fisrt Image URL" class="form-control w-25" id="image" required/>
     </div>
     <div class="form-group">
-        <input type="text" name="image" placeholder="Second Image URL" class="form-control w-25" id="image" />
+        <input type="text" name="image2" placeholder="Second Image URL" class="form-control w-25" id="image" required/>
     </div>
     <div class="form-group">
-        <input type="text" name="image" placeholder="Third Image URL" class="form-control w-25" id="image" />
+        <input type="text" name="image3" placeholder="Third Image URL" class="form-control w-25" id="image" required/>
     </div>
     <div class="form-group">
-        <input type="text" name="image" placeholder="Last Image URL" class="form-control w-25" id="image" />
+        <input type="text" name="image4" placeholder="Last Image URL" class="form-control w-25" id="image" required/>
     </div>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
