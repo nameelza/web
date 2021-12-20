@@ -13,22 +13,22 @@ class Property(models.Model):
     description = models.CharField(max_length=200, blank=False)
     price = models.IntegerField(blank=False)
     CITY_CHOICES = [
+        ('BERKELEY', 'Berkeley'),
+        ('CONCORD', 'Concord'),
+        ('FREMONT', 'Fremont'),
+        ('HAYWARD', 'Hayward'),
+        ('MV', 'Mountain View'),
+        ('OAKLAND', 'Oakland'),
+        ('PALO ALTO', 'Palo Alto'),
+        ('RICHMOND', 'Richmond'),
+        ('SC', 'Santa Clara'),
         ('SJ', 'San Jose'),
         ('SF', 'San Francisco'),
-        ('OAKLAND', 'Oakland'),
-        ('FREMONT', 'Fremont'),
-        ('SR', 'Santa Rosa'),
-        ('HAYWARD', 'Hayward'),
-        ('PALO ALTO', 'Palo Alto'),
-        ('SV', 'Sunnyvale'),
-        ('SC', 'Santa Clara'),
-        ('VALLEJO', 'Vallejo'),
-        ('CONCORD', 'Concord'),
-        ('BERKELEY', 'Berkeley'),
         ('SM', 'San Mateo'),
-        ('MV', 'Mountain View'),
         ('SR', 'San Rafael'),
-        ('RICHMOND', 'Richmond')
+        ('SR', 'Santa Rosa'),
+        ('SV', 'Sunnyvale'),
+        ('VALLEJO', 'Vallejo'),
     ]
     city = models.CharField(max_length=50, choices=CITY_CHOICES, blank=False)
     address = models.CharField(max_length=100, blank=False)

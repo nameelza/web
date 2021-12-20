@@ -23,17 +23,22 @@
         </div>
     </div>
     <div class="form-group">
-        <input type="text" name="city" placeholder="City" class="form-control" id="city" required/>
+        <select class="form-control" name="city_category" name="city" id="city_category" required>
+            <option value="" disabled selected>City</option>
+            {% for category in city_category %}
+                <option value="{{category.0}}">{{category.1}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
         <input type="text" name="form-address" placeholder="Address" class="form-control" id="form-address" required/>
     </div>
     <div class="form-group">
-        <select class="form-control w-25" name="place_category" id="category" class="form-control" required>
+        <select class="form-control" name="place_category" id="place_category" required>
             <option value="" disabled selected>Select Category</option>
-            <option value="1">Entire place</option>
-            <option value="2">Private room</option>
-            <option value="3">Shared room</option>
+            {% for category in place_category %}
+                <option value="{{category.0}}">{{category.1}}</option>
+            {% endfor %}
         </select>
     </div>
     <label for="form-select" class="form-label">Choose amenitites</label>

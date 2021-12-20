@@ -30,7 +30,7 @@ def create(request):
         title = request.POST['title']
         description = request.POST['description']
         price = request.POST['price']
-        city = request.POST['city']
+        city = request.POST['city_category']
         address = request.POST['form-address']
         place = request.POST['place_category']
         image1 = request.POST['image1']
