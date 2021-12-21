@@ -90,7 +90,7 @@ def login_view(request):
             return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "student/login.html", {
-                "message": "Invalid username and/or password."
+                "message": "Invalid email and/or password."
             })
     else:
         return render(request, "student/login.html")
@@ -104,6 +104,8 @@ def logout_view(request):
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
+        firstname = request.POST["firstname"]
+        lastname = request.POST["lastname"]
         email = request.POST["email"]
 
         # Ensure password matches confirmation
@@ -116,7 +118,7 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(username = username, first_name = firstname, last_name = lastname, email = email, password = password)
             user.save()
         except IntegrityError:
             return render(request, "student/register.html", {
