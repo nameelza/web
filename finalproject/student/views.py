@@ -12,7 +12,16 @@ def index(request):
 
 
 def list_results(request):
-    return render(request, 'student/results.html')
+    obj = {'first': 1, 'second': 2}
+    properties = Property.objects.all()
+    amenities = Amenities.objects.all()
+    print(obj)
+    print(amenities[0])
+    print(properties[0])
+    return render(request, 'student/results.html', {
+        'properties': properties,
+        'amenities': amenities
+    })
 
 
 def rental(request):
@@ -52,9 +61,11 @@ def create(request):
         electricity = request.POST.get('electricity', False)
         gas = request.POST.get('gas', False)
         heating = request.POST.get('heating', False)
-        amenities = Amenities(property=new_property, wifi=wifi=='wifi', kitchen=kitchen=='kitchen', washer=washer=='washer', gym=gym=='gym', bike=bike=='bike', parking=parking=='parking', cctv=cctv=='cctv', gate=gate=='gate', wifi_bill=wifi_bill=='wifi-bill', water_bill=water=='water', electricity_bill=electricity=='electricity', gas_bill=gas=='gas', heating_bill=heating=='heating')
+        amenities = Amenities(property=new_property, wifi=wifi=='wifi', kitchen=kitchen=='kitchen', washer=washer=='washer', bike=bike=='bike', parking=parking=='parking', cctv=cctv=='cctv', gate=gate=='gate', wifi_bill=wifi_bill=='wifi-bill', water_bill=water=='water', electricity_bill=electricity=='electricity', gas_bill=gas=='gas', heating_bill=heating=='heating')
         amenities.save()
-        pass
+        return render(request, 'student/create.html', {
+            'message': 'Property created!'
+        })
     else:
         city_category = Property.CITY_CHOICES
         place_category = Property.PLACE_CHOICES

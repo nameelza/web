@@ -7,109 +7,44 @@
     All Bay Area Rentals
 </div>
 <div class="results-list">
+    {% for property in properties %}
     <hr>
     <a href="{% url 'rental' %}" class="result">
         <div class="result-image">
-            <img src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=720" alt="image of the property">
+            <img src="{{property.image1}}" alt="image of the property">
         </div>
         <div class="result-content">
-            <div class="small">Private room</div>
-            <div class="big">San Francisco • Queen room with shared bathroom</div>
+            <div class="small">{{property.get_place_display}}</div>
+            <div class="big">{{property.get_city_display}} • {{property.title}}</div>
             <hr class="hr-result">
             <ul class="amenities">
+                {% for amenity in amenities %}
+                {% if amenity.property == property %}
+                {% if amenity.wifi == True %}
                 <li class="small">Wifi</li>
+                {% endif %}
+                {% if amenity.washer == True %}
                 <li class="small">Washer</li>
+                {% endif %}
+                {% if amenity.kitchen == True %}
                 <li class="small">Kitchen</li>
-                <li class="small">Bike storage</li>
+                {% endif %}
+                {% if amenity.bike == True %}
+                <li class="small">Bike Storage</li>
+                {% endif %}
+                {% if amenity.parking == True %}
+                <li class="small">Parking</li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
             </ul>
             <div class="price">
-                <span id="price">$980</span>
+                <span id="price">${{property.price}}</span>
                 <span>/ month</span>
             </div>
         </div>
     </a>
-    <hr>
-    <a href="{% url 'rental' %}" class="result">
-        <div class="result-image">
-            <img src="https://a0.muscache.com/im/pictures/23df76e7-a08c-4e44-801b-11fc65a9c122.jpg?im_w=1200" alt="image of the property">
-        </div>
-        <div class="result-content">
-            <div class="small">Entire place</div>
-            <div class="big">Berkeley • Lovely one bedroom in Berkeley</div>
-            <hr class="hr-result">
-            <ul class="amenities">
-                <li class="small">Wifi</li>
-                <li class="small">Washer</li>
-                <li class="small">Kitchen</li>
-            </ul>
-            <div class="price">
-                <span id="price">$1900</span>
-                <span>/ month</span>
-            </div>
-        </div>
-    </a>
-    <hr>
-    <a href="{% url 'rental' %}" class="result">
-        <div class="result-image">
-            <img src="https://images1.forrent.com/i2/gl2QvLDUM51biIZFi8ZftC-kgjtnG0rN1aSrdd_crWQ/117/image.jpg" alt="image of the property">
-        </div>
-        <div class="result-content">
-            <div class="small">Entire place</div>
-            <div class="big">San Francisco • Modern studio</div>
-            <hr class="hr-result">
-            <ul class="amenities">
-                <li class="small">Wifi</li>
-                <li class="small">Washer</li>
-                <li class="small">Kitchen</li>
-                <li class="small">Gym</li>
-            </ul>
-            <div class="price">
-                <span id="price">$2120</span>
-                <span>/ month</span>
-            </div>
-        </div>
-    </a>
-    <hr>
-    <a href="{% url 'rental' %}" class="result">
-        <div class="result-image">
-            <img src="https://image.student.com/max_1250x700/3519773e-65e8-11e9-ad90-0e62a2ece8f8-fe27d0d49d0242f2af85a656a694433e.jpg" alt="image of the property">
-        </div>
-        <div class="result-content">
-            <div class="small">Private room</div>
-            <div class="big">San Francisco • One spacious, cozy private room and bathroom</div>
-            <hr class="hr-result">
-            <ul class="amenities">
-                <li class="small">Wifi</li>
-                <li class="small">Kitchen</li>
-                <li class="small">Bike storage</li>
-            </ul>
-            <div class="price">
-                <span id="price">$1250</span>
-                <span>/ month</span>
-            </div>
-        </div>
-    </a>
-    <hr>
-    <a href="{% url 'rental' %}" class="result">
-        <div class="result-image">
-            <img src="https://image.student.com/max_1250x700/Untitled_design_(20)-346949cd88fb689232c8c191e5914fd7.png" alt="image of the property">
-        </div>
-        <div class="result-content">
-            <div class="small">Shared room</div>
-            <div class="big">San Francisco • FOUND Study Nob Hill</div>
-            <hr class="hr-result">
-            <ul class="amenities">
-                <li class="small">Wifi</li>
-                <li class="small">Washer</li>
-                <li class="small">Kitchen</li>
-                <li class="small">Bike storage</li>
-            </ul>
-            <div class="price">
-                <span id="price">$650</span>
-                <span>/ month</span>
-            </div>
-        </div>
-    </a>
+    {% endfor %}
 </div>
 
 {% endblock %}

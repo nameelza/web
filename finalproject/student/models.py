@@ -49,7 +49,6 @@ class Amenities(models.Model):
     wifi = models.BooleanField(default=False)
     kitchen = models.BooleanField(default=False)
     washer = models.BooleanField(default=False)
-    gym = models.BooleanField(default=False)
     bike = models.BooleanField(default=False)
     parking = models.BooleanField(default=False)
     cctv = models.BooleanField(default=False)

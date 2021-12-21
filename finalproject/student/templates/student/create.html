@@ -7,6 +7,9 @@
     Add your property
 </div>
 <hr>
+{% if message %}
+    <div class="alert-success">{{ message }}</div>
+{% endif %}
 <form action="{% url 'create' %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
