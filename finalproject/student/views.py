@@ -22,8 +22,10 @@ def list_results(request):
 
 def rental(request, property_id):
     property = Property.objects.get(id=property_id)
+    user = request.user
     return render(request, 'student/rental.html', {
-        'property': property
+        'property': property,
+        'user': user
     })
 
 
