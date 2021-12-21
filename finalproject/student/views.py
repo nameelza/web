@@ -12,20 +12,19 @@ def index(request):
 
 
 def list_results(request):
-    obj = {'first': 1, 'second': 2}
     properties = Property.objects.all()
     amenities = Amenities.objects.all()
-    print(obj)
-    print(amenities[0])
-    print(properties[0])
     return render(request, 'student/results.html', {
         'properties': properties,
         'amenities': amenities
     })
 
 
-def rental(request):
-    return render(request, 'student/rental.html')
+def rental(request, property_id):
+    property = Property.objects.get(id=property_id)
+    return render(request, 'student/rental.html', {
+        'property': property
+    })
 
 
 def profile(request):

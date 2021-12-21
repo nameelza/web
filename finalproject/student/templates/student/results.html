@@ -9,7 +9,7 @@
 <div class="results-list">
     {% for property in properties %}
     <hr>
-    <a href="{% url 'rental' %}" class="result">
+    <a href="{% url 'rental' property.id %}" class="result">
         <div class="result-image">
             <img src="{{property.image1}}" alt="image of the property">
         </div>

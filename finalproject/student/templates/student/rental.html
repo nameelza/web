@@ -1,11 +1,11 @@
 {% extends "student/layout.html" %} {% block title %} Queen room with shared
 bathroom {%endblock%} {% block body %}
-<div class="results-heading">Queen room with shared bathroom</div>
-<div class="small">Private room • San Francisco</div>
+<div class="results-heading">{{property.title}}</div>
+<div class="small">{{property.get_place_display}} • {{property.get_city_display}}</div>
 <div class="image-gallery">
   <div class="image-container">
     <img
-      src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440"
+      src="{{property.image1}}"
       alt="Queen room with shared bathroom"
       id="expandedImage"
     />
@@ -13,53 +13,45 @@ bathroom {%endblock%} {% block body %}
   <div class="images-column">
     <div class="image-single">
       <img
-        src="https://a0.muscache.com/im/pictures/ac6e5839-c701-4f13-ac8b-89a47d2b7e74.jpg?im_w=1440"
-        alt="Queen room with shared bathroom"
+        src="{{property.image1}}"
+        alt="{{property.title}}"
         id="smallImage"
       />
     </div>
     <div class="image-single">
       <img
-        src="https://a0.muscache.com/im/pictures/edfcad9c-fe04-4bb2-a712-6ae253dfd461.jpg?im_w=1440"
-        alt="Queen room with shared bathroom"
+        src="{{property.image2}}"
+        alt="{{property.title}}"
         id="smallImage"
       />
     </div>
     <div class="image-single">
       <img
-        src="https://a0.muscache.com/im/pictures/a68d42e0-2e19-4c74-83c9-a5846df08843.jpg?im_w=1440"
-        alt="Queen room with shared bathroom"
+        src="{{property.image3}}"
+        alt="{{property.title}}"
         id="smallImage"
       />
     </div>
     <div class="image-single">
       <img
-        src="https://a0.muscache.com/im/pictures/7cbd13f3-a6a8-4b71-b1e7-3f9c9f6aaa55.jpg?im_w=1440"
-        alt="Queen room with shared bathroom"
+        src="{{property.image4}}"
+        alt="{{property.title}}"
         id="smallImage"
       />
     </div>
   </div>
 </div>
-
 <div class="rental-content">
   <div class="rental-content-info">
     <div class="big" id="rental-big">Property details</div>
-    <div class="info">
-      The Dorel is your perfect escape from the hustle and bustle of city life.
-      Newly remodeled in 2019, our partially furnished efficiency units were
-      built with your comfort in mind with the necessities needed to settle into
-      urban life including a private bathroom, full or double Murphy beds, sofa,
-      microwave and mini-fridge. The building features a gourmet community
-      kitchen, an outdoor patio deck, on-site laundry and high-speed Wi-Fi.
-    </div>
+    <div class="info">{{property.description}}</div>
     <div class="big" id="rental-big">Address</div>
     <a
       href="https://www.google.com/maps/place/8+10th+St,+San+Francisco,+CA+94103/@37.7761435,-122.4196172,17z/data=!3m1!4b1!4m5!3m4!1s0x8085809c396a98e3:0x6804142df53695e9!8m2!3d37.7761393!4d-122.4174285?hl=en"
       class="small"
       target="_blank"
       rel="noopener noreferrer"
-      >8 10th St, San Francisco, 94103</a
+      >{{property.address}}</a
     >
     <hr />
     <div class="big" id="rental-big">Amenities</div>
@@ -97,7 +89,7 @@ bathroom {%endblock%} {% block body %}
   </div>
   <div class="rental-book">
     <div class="price">
-      <span id="price">$980</span>
+      <span id="price">${{property.price}}</span>
       <span>/ month</span>
     </div>
     <div class="book-form">
