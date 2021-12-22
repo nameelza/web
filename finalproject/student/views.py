@@ -22,15 +22,24 @@ def list_results(request):
 
 def rental(request, property_id):
     property = Property.objects.get(id=property_id)
+    amenities = Amenities.objects.get(property=property)
     user = request.user
     return render(request, 'student/rental.html', {
         'property': property,
-        'user': user
+        'user': user,
+        'amenities': amenities
     })
 
 
 def profile(request):
-    return render(request, 'student/profile.html')
+    user = request.user
+    properties = Property.objects.filter(user=user)
+    enquiries = Booking.objects.filter(user=user)
+    return render(request, 'student/profile.html', {
+        'user': user,
+        'properties': properties,
+        'enquiries': enquiries
+    })
 
 
 def create(request):
@@ -52,7 +61,6 @@ def create(request):
         wifi = request.POST.get('wifi', False)
         kitchen = request.POST.get('kitchen', False)
         washer = request.POST.get('washer', False)
-        gym = request.POST.get('gym', False)
         bike = request.POST.get('bike', False)
         parking = request.POST.get('parking', False)
         cctv = request.POST.get('cctv', False)

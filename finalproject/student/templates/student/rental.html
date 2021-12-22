@@ -46,46 +46,119 @@ bathroom {%endblock%} {% block body %}
     <div class="big" id="rental-big">Property details</div>
     <div class="info">{{property.description}}</div>
     <div class="big" id="rental-big">Address</div>
-    <a
-      href="https://www.google.com/maps/place/8+10th+St,+San+Francisco,+CA+94103/@37.7761435,-122.4196172,17z/data=!3m1!4b1!4m5!3m4!1s0x8085809c396a98e3:0x6804142df53695e9!8m2!3d37.7761393!4d-122.4174285?hl=en"
-      class="small"
-      target="_blank"
-      rel="noopener noreferrer"
-      >{{property.address}}</a
-    >
+    <span class="small">{{property.address}}</span>
     <hr />
     <div class="big" id="rental-big">Amenities</div>
     <ul class="amenities">
+      {% if amenities.wifi == True %}
       <li class="small">Wifi</li>
+      {% endif %}
+      {% if amenities.kitchen == True %}
       <li class="small">Kitchen</li>
+      {% endif %}
+      {% if amenities.washer == True %}
       <li class="small">Washer</li>
+      {% endif %}
+      {% if amenities.bike == True %}
       <li class="small">Bike storage</li>
+      {% endif %}
+      {% if amenities.parking == True %}
+      <li class="small">Parking</li>
+      {% endif %}
     </ul>
     <div class="big" id="rental-big">Security & Safety</div>
+    {% if amenities.cctv == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">CCTV / Surveillance Cameras</li>
       </ul>
     </div>
+    {% else %}
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">CCTV / Surveillance Cameras</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if amenities.gate == True %}
+    <div id="included">
+      <ul class="amenities">
+        <li class="small">Controlled Access Gate</li>
+      </ul>
+    </div>
+    {% else %}
     <div id="notIncluded">
       <ul class="amenities">
         <li class="small">Controlled Access Gate</li>
       </ul>
     </div>
+    {% endif %}
     <div class="big" id="rental-big">Bills included</div>
+    {% if amenities.wifi_bill == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">Wifi</li>
+      </ul>
+    </div>
+    {% else %}
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">Wifi</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if amenities.water_bill == True %}
+    <div id="included">
+      <ul class="amenities">
         <li class="small">Water</li>
       </ul>
     </div>
+    {% else %}
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">Water</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if amenities.electricity_bill == True %}
+    <div id="included">
+      <ul class="amenities">
+        <li class="small">Electricity</li>
+      </ul>
+    </div>
+    {% else %}
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">Electricity</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if amenities.gas_bill == True %}
+    <div id="included">
+      <ul class="amenities">
+        <li class="small">Gas</li>
+      </ul>
+    </div>
+    {% else %}
     <div id="notIncluded">
       <ul class="amenities">
         <li class="small">Gas</li>
-        <li class="small">Electricity</li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if amenities.heating_bill == True %}
+    <div id="included">
+      <ul class="amenities">
         <li class="small">Heating</li>
       </ul>
     </div>
+    {% else %}
+    <div id="notIncluded">
+      <ul class="amenities">
+        <li class="small">Heating</li>
+      </ul>
+    </div>
+    {% endif %}
   </div>
   <div class="rental-book">
     <div class="price">
