@@ -434,6 +434,29 @@ hr {
   cursor: pointer;
 }
 
+.bookers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 15px 15px;
+  height: fit-content;
+}
+
+.booker-button {
+  align-self: center;
+}
+
+.booker-button a:last-child {
+  margin-left: 10px;
+}
+
+.booker-info {
+  width: 70%;
+}
+
 /* Create page */
 
 .form-group {

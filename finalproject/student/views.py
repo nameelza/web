@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.utils import Error
 from django.shortcuts import render
 from django.urls import reverse
@@ -20,85 +21,95 @@ def list_results(request):
         'amenities': amenities
     })
 
-
+@login_required
 def rental(request, property_id):
-    if request.method == "POST":
-        user = request.user
-        property = Property.objects.get(id=property_id)
-        phone = request.POST['phonenumber']
-        message = request.POST['message']
-        if len(Booking.objects.filter(property=property, user=user)) == 0:
-            new_enquiry = Booking(user=user, property=property, phone=phone, message=message)
-            new_enquiry.save()
+    user = request.user
+    if user.is_authenticated:
+        if request.method == "POST":
+            property = Property.objects.get(id=property_id)
+            phone = request.POST['phonenumber']
+            message = request.POST['message']
+            if len(Booking.objects.filter(property=property, user=user)) == 0:
+                new_enquiry = Booking(user=user, property=property, phone=phone, message=message)
+                new_enquiry.save()
+            else:
+                Error("You have already made an enquiry for this property")
+            amenities = Amenities.objects.get(property=property)
+            booking = Booking.objects.filter(property=property, user=user)
+            return HttpResponseRedirect(reverse("rental", args=(property.id,)))
         else:
-            return HttpResponseRedirect(reverse("profile"))
-        amenities = Amenities.objects.get(property=property)
-        booking = Booking.objects.filter(property=property, user=user)
-        return HttpResponseRedirect(reverse("rental", args=(property.id,)))
+            property = Property.objects.get(id=property_id)
+            amenities = Amenities.objects.get(property=property)
+            booking = Booking.objects.filter(property=property, user=user)
+            return render(request, 'student/rental.html', {
+                'property': property,
+                'user': user,
+                'amenities': amenities,
+                'booking': booking
+            })
     else:
-        property = Property.objects.get(id=property_id)
-        amenities = Amenities.objects.get(property=property)
-        user = request.user
-        booking = Booking.objects.filter(property=property, user=user)
-        return render(request, 'student/rental.html', {
-            'property': property,
-            'user': user,
-            'amenities': amenities,
-            'booking': booking
-        })
+        return HttpResponseRedirect(reverse("login_view"))
 
-
+@login_required
 def profile(request):
     user = request.user
-    properties = Property.objects.filter(user=user)
-    enquiries = Booking.objects.filter(user=user)
-    return render(request, 'student/profile.html', {
-        'user': user,
-        'properties': properties,
-        'enquiries': enquiries
-    })
-
-
-def create(request):
-    if request.method == "POST":
-        # Create new property
-        user = request.user
-        title = request.POST['title']
-        description = request.POST['description']
-        price = request.POST['price']
-        city = request.POST['city_category']
-        address = request.POST['form-address']
-        place = request.POST['place_category']
-        image1 = request.POST['image1']
-        image2 = request.POST['image2']
-        image3 = request.POST['image3']
-        image4 = request.POST['image4']
-        new_property = Property(user=user, title=title, description=description, price=price, city=city, address=address, place=place, image1=image1, image2=image2, image3=image3, image4=image4)
-        new_property.save()
-        wifi = request.POST.get('wifi', False)
-        kitchen = request.POST.get('kitchen', False)
-        washer = request.POST.get('washer', False)
-        bike = request.POST.get('bike', False)
-        parking = request.POST.get('parking', False)
-        cctv = request.POST.get('cctv', False)
-        gate = request.POST.get('gate', False)
-        wifi_bill = request.POST.get('wifi-bill', False)
-        water = request.POST.get('water', False)
-        electricity = request.POST.get('electricity', False)
-        gas = request.POST.get('gas', False)
-        heating = request.POST.get('heating', False)
-        amenities = Amenities(property=new_property, wifi=wifi=='wifi', kitchen=kitchen=='kitchen', washer=washer=='washer', bike=bike=='bike', parking=parking=='parking', cctv=cctv=='cctv', gate=gate=='gate', wifi_bill=wifi_bill=='wifi-bill', water_bill=water=='water', electricity_bill=electricity=='electricity', gas_bill=gas=='gas', heating_bill=heating=='heating')
-        amenities.save()
-        return render(request, 'student/create.html', {
-            'message': 'Property created!'
+    if user.is_authenticated:
+        properties = Property.objects.filter(user=user)
+        enquiries = Booking.objects.filter(user=user)
+        amenities = Amenities.objects.all
+        return render(request, 'student/profile.html', {
+            'user': user,
+            'properties': properties,
+            'enquiries': enquiries,
+            'amenities': amenities
         })
     else:
-        city_category = Property.CITY_CHOICES
-        place_category = Property.PLACE_CHOICES
-        return render(request, 'student/create.html', {
-            'city_category': city_category,
-            'place_category': place_category
-        })
+        HttpResponseRedirect(reverse("login_view"))
+
+@login_required
+def create(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == "POST":
+            # Create new property
+            title = request.POST['title']
+            description = request.POST['description']
+            price = request.POST['price']
+            city = request.POST['city_category']
+            address = request.POST['form-address']
+            place = request.POST['place_category']
+            image1 = request.POST['image1']
+            image2 = request.POST['image2']
+            image3 = request.POST['image3']
+            image4 = request.POST['image4']
+            new_property = Property(user=user, title=title, description=description, price=price, city=city, address=address, place=place, image1=image1, image2=image2, image3=image3, image4=image4)
+            new_property.save()
+            wifi = request.POST.get('wifi', False)
+            kitchen = request.POST.get('kitchen', False)
+            washer = request.POST.get('washer', False)
+            bike = request.POST.get('bike', False)
+            parking = request.POST.get('parking', False)
+            cctv = request.POST.get('cctv', False)
+            gate = request.POST.get('gate', False)
+            wifi_bill = request.POST.get('wifi-bill', False)
+            water = request.POST.get('water', False)
+            electricity = request.POST.get('electricity', False)
+            gas = request.POST.get('gas', False)
+            heating = request.POST.get('heating', False)
+            amenities = Amenities(property=new_property, wifi=wifi=='wifi', kitchen=kitchen=='kitchen', washer=washer=='washer', bike=bike=='bike', parking=parking=='parking', cctv=cctv=='cctv', gate=gate=='gate', wifi_bill=wifi_bill=='wifi-bill', water_bill=water=='water', electricity_bill=electricity=='electricity', gas_bill=gas=='gas', heating_bill=heating=='heating')
+            amenities.save()
+            return render(request, 'student/create.html', {
+                'message': 'Property created!'
+            })
+        else:
+            city_category = Property.CITY_CHOICES
+            place_category = Property.PLACE_CHOICES
+            return render(request, 'student/create.html', {
+                'city_category': city_category,
+                'place_category': place_category
+            })
+    else:
+        return HttpResponseRedirect(reverse("login_view"))
 
 
 def login_view(request):
