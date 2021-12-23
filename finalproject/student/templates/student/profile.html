@@ -9,7 +9,10 @@
     <a class="profile-big" id="profile-properties">Your properties</a>
     <a class="profile-big" id="profile-edit">Edit profile</a>
 </div>
+
+
 <div class="profile-links-content" id="enquiries">
+    {% if enquiry %}
     {% for enquiry in enquiries %}
     <hr>
     <a href="{% url 'rental' enquiry.property.id %}" class="result">
@@ -49,7 +52,12 @@
     </a>
     <div class="rental-approval" id="{{enquiry.status}}">{{enquiry.status}}</div>
     {% endfor %}
+    {% else %}
+    <hr>
+    <div>You haven't made any enquiries</div>
+    {% endif %}
 </div>
+
 
 <div class="profile-links-content" id="properties">
     {% if properties %}
@@ -74,28 +82,28 @@
             </div>
         </div>
     </a>
+    {% for booker in bookers %}
+    {% if booker.property == property %}
     <div class="bookers">
         <div class="booker-info">
-            <div class="small">Liza S</div>
-            <div class="small">liza@gmail.com • 4157737383</div>
-            <div>Hi! I'd love to rent yout property.
-                Hi! I'd love to rent yout property. Hi! I'd love to rent yout property.
-                Hi! I'd love to rent yout property. Hi! I'd love to rent yout property.Hi!
-                I'd love to rent yout property
-            </div>
+            <div class="small">{{booker.user.first_name}} {{booker.user.last_name}}</div>
+            <div class="small">{{booker.user.email}} • {{booker.phone}}</div>
+            <div>{{booker.message}}</div>
         </div>
         <div class="booker-button">
             <a href="#"><button id="Confirmed">Accept</button></a>
             <a href="#"><button id="Declined">Decline</button></a>
         </div>
     </div>
+    {% endif %}
+    {% endfor %}
     {% endfor %}
     {% else %}
     <hr>
     <div>You don't have any properties</div>
     {% endif %}
-    
 </div>
+
 
 <div class="edit-content" id="edit">
     <hr>

@@ -57,11 +57,14 @@ def profile(request):
         properties = Property.objects.filter(user=user)
         enquiries = Booking.objects.filter(user=user)
         amenities = Amenities.objects.all
+        bookers = Booking.objects.filter(property__in=properties)
+        print(bookers)
         return render(request, 'student/profile.html', {
             'user': user,
             'properties': properties,
             'enquiries': enquiries,
-            'amenities': amenities
+            'amenities': amenities,
+            'bookers': bookers
         })
     else:
         HttpResponseRedirect(reverse("login_view"))
