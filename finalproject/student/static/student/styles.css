@@ -143,6 +143,11 @@ button {
   cursor: pointer;
 }
 
+button:disabled:hover {
+  background-color: #ff385c;
+  cursor: default;
+}
+
 button:hover {
   background-color: #eb2348;
 }

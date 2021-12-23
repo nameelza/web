@@ -21,14 +21,32 @@ def list_results(request):
 
 
 def rental(request, property_id):
-    property = Property.objects.get(id=property_id)
-    amenities = Amenities.objects.get(property=property)
-    user = request.user
-    return render(request, 'student/rental.html', {
-        'property': property,
-        'user': user,
-        'amenities': amenities
-    })
+    if request.method == "POST":
+        user = request.user
+        property = Property.objects.get(id=property_id)
+        phone = request.POST['phonenumber']
+        message = request.POST['message']
+        new_enquiry = Booking(user=user, property=property, phone=phone, message=message)
+        new_enquiry.save()
+        amenities = Amenities.objects.get(property=property)
+        booking = Booking.objects.filter(property=property, user=user)
+        return render(request, 'student/rental.html', {
+            'property': property,
+            'user': user,
+            'amenities': amenities,
+            'booking': booking
+        })
+    else:
+        property = Property.objects.get(id=property_id)
+        amenities = Amenities.objects.get(property=property)
+        user = request.user
+        booking = Booking.objects.filter(property=property, user=user)
+        return render(request, 'student/rental.html', {
+            'property': property,
+            'user': user,
+            'amenities': amenities,
+            'booking': booking
+        })
 
 
 def profile(request):

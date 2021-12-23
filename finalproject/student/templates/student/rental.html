@@ -167,15 +167,18 @@ bathroom {%endblock%} {% block body %}
       <span>/ month</span>
     </div>
     <div class="book-form">
-      <form action="">
+      <form action="{% url 'rental' property.id %}" method="POST">
+        {% csrf_token %}
         <div class="form-group">
           <label for="name" >First name</label>
           <input
             type="text"
             class="form-control"
-            id="name"
+            id="firstname"
+            name="firstname"
             placeholder="Enter first name"
             value="{{user.first_name}}"
+            disabled
           />
         </div>
         <div class="form-group">
@@ -183,9 +186,11 @@ bathroom {%endblock%} {% block body %}
           <input
             type="text"
             class="form-control"
-            id="name"
+            id="lastname"
+            name="lastname"
             placeholder="Enter last name"
             value="{{user.last_name}}"
+            disabled
           />
         </div>
         <div class="form-group">
@@ -194,16 +199,45 @@ bathroom {%endblock%} {% block body %}
             type="email"
             class="form-control"
             id="email"
+            name="email"
             placeholder="Enter email"
             value="{{user.email}}"
+            disabled
           />
         </div>
+        {% if booking %}
         <div class="form-group">
           <label for="phone">Phone number</label>
           <input
             type="text"
             class="form-control"
             id="phone"
+            name="phonenumber"
+            placeholder="Enter phone number"
+            value="{{booking.0.phone}}"
+            disabled
+          />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            class="form-control"
+            id="message"
+            name="message"
+            rows="3"
+            placeholder="Enter message"
+            disabled
+          >{{booking.0.message}}</textarea>
+        </div>
+        <button type="submit" id="button-rental" disabled>Enquiry status: {{booking.0.status}}</button>
+        {% else %}
+        <div class="form-group">
+          <label for="phone">Phone number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="phone"
+            name="phonenumber"
             placeholder="Enter phone number"
           />
         </div>
@@ -212,11 +246,13 @@ bathroom {%endblock%} {% block body %}
           <textarea
             class="form-control"
             id="message"
+            name="message"
             rows="3"
             placeholder="Enter message"
           ></textarea>
         </div>
         <button type="submit" id="button-rental">Make enquiry</button>
+        {% endif %}
       </form>
     </div>
   </div>
