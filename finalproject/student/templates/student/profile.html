@@ -3,7 +3,7 @@
 {% block title %} Your profile {%endblock%}
 
 {% block body %}
-<div class="results-heading">Hello, Liza!</div>
+<div class="results-heading">Hello, {{user.first_name}}!</div>
 <div class="profile-links">
     <a class="profile-big" id="profile-enquiries">Your enquiries</a>
     <a class="profile-big" id="profile-properties">Your properties</a>
@@ -55,8 +55,32 @@
     <div class="rental-approval" style="background-color: #ebcd23;" disabled>Pending</div>
 </div>
 <div class="profile-links-content" id="properties">
+    {% if properties %}
+    {% for property in properties %}
     <hr>
-    You don't have any properties yet.
+    <a href="{% url 'rental' property.id %}" class="result">
+        <div class="result-image">
+            <img src="{{property.image1}}" alt="image of the property">
+        </div>
+        <div class="result-content">
+            <div class="small">{{property.get_place_display}}</div>
+            <div class="big">{{property.get_city_display}} • {{property.title}}</div>
+            <hr class="hr-result">
+            <ul class="amenities">
+                <li class="small">Wifi</li>
+                <li class="small">Kitchen</li>
+                <li class="small">Bike storage</li>
+            </ul>
+            <div class="price">
+                <span id="price">${{property.price}}</span>
+                <span>/ month</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+    {% else %}
+    <div>You don't have any properties</div>
+    {% endif %}
 </div>
 <div class="edit-content" id="edit">
     <hr>
