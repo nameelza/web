@@ -1,3 +1,4 @@
+from django.db.utils import Error
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
@@ -26,16 +27,14 @@ def rental(request, property_id):
         property = Property.objects.get(id=property_id)
         phone = request.POST['phonenumber']
         message = request.POST['message']
-        new_enquiry = Booking(user=user, property=property, phone=phone, message=message)
-        new_enquiry.save()
+        if len(Booking.objects.filter(property=property, user=user)) == 0:
+            new_enquiry = Booking(user=user, property=property, phone=phone, message=message)
+            new_enquiry.save()
+        else:
+            return HttpResponseRedirect(reverse("profile"))
         amenities = Amenities.objects.get(property=property)
         booking = Booking.objects.filter(property=property, user=user)
-        return render(request, 'student/rental.html', {
-            'property': property,
-            'user': user,
-            'amenities': amenities,
-            'booking': booking
-        })
+        return HttpResponseRedirect(reverse("rental", args=(property.id,)))
     else:
         property = Property.objects.get(id=property_id)
         amenities = Amenities.objects.get(property=property)

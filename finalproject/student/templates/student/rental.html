@@ -229,7 +229,7 @@ bathroom {%endblock%} {% block body %}
             disabled
           >{{booking.0.message}}</textarea>
         </div>
-        <button type="submit" id="button-rental" disabled>Enquiry status: {{booking.0.status}}</button>
+        <button type="submit" class="button-rental" id="{{booking.0.status}}" disabled>Enquiry status: {{booking.0.status}}</button>
         {% else %}
         <div class="form-group">
           <label for="phone">Phone number</label>
@@ -251,7 +251,7 @@ bathroom {%endblock%} {% block body %}
             placeholder="Enter message"
           ></textarea>
         </div>
-        <button type="submit" id="button-rental">Make enquiry</button>
+        <button type="submit" class="button-rental" >Make enquiry</button>
         {% endif %}
       </form>
     </div>

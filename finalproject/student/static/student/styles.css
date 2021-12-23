@@ -332,8 +332,20 @@ hr {
   margin: 20px 0 0 0;
 }
 
-#button-rental {
+.button-rental {
   width: 100%;
+}
+
+#Pending {
+  background-color: #ebcd23;
+}
+
+#Confirmed {
+  background-color: #3bc518;
+}
+
+#Declined {
+  background-color: #e62020;
 }
 
 .form-group {
