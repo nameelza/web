@@ -12,7 +12,7 @@
 
 
 <div class="profile-links-content" id="enquiries">
-    {% if enquiry %}
+    {% if enquiries %}
     {% for enquiry in enquiries %}
     <hr>
     <a href="{% url 'rental' enquiry.property.id %}" class="result">

@@ -58,7 +58,6 @@ def profile(request):
         enquiries = Booking.objects.filter(user=user)
         amenities = Amenities.objects.all
         bookers = Booking.objects.filter(property__in=properties)
-        print(bookers)
         return render(request, 'student/profile.html', {
             'user': user,
             'properties': properties,
