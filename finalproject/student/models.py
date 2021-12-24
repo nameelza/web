@@ -43,6 +43,7 @@ class Property(models.Model):
     image2 = models.TextField(blank=False)
     image3 = models.TextField(blank=False)
     image4 = models.TextField(blank=False)
+    available = models.BooleanField(default=True)
 
 class Amenities(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)

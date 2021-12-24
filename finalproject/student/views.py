@@ -15,11 +15,23 @@ def index(request):
 
 
 def list_results(request):
-    properties = Property.objects.all()
+    properties = Property.objects.filter(available = True)
     amenities = Amenities.objects.all()
+    message = "All Bay Area Rentals"
     return render(request, 'student/results.html', {
         'properties': properties,
-        'amenities': amenities
+        'amenities': amenities,
+        'message': message
+    })
+
+def list_booked(request):
+    properties = Property.objects.filter(available = False)
+    amenities = Amenities.objects.all()
+    message = "Booked Properties"
+    return render(request, 'student/results.html', {
+        'properties': properties,
+        'amenities': amenities,
+        'message': message
     })
 
 @login_required
@@ -175,6 +187,8 @@ def accept(request):
     booking = Booking.objects.get(id=booking_id)
     booking.status = "Confirmed"
     booking.save()
+    property = Property.objects.get(id=booking.property.id)
+    property.available = False
     return HttpResponseRedirect(reverse("profile"))
 
 @csrf_exempt

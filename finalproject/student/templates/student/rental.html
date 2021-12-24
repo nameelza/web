@@ -161,6 +161,7 @@ bathroom {%endblock%} {% block body %}
     {% endif %}
   </div>
   {% if property.user != user %}
+  {% if property.available == True %}
   <div class="rental-book">
     <div class="price">
       <span id="price">${{property.price}}</span>
@@ -256,6 +257,7 @@ bathroom {%endblock%} {% block body %}
       </form>
     </div>
   </div>
+  {% endif %}
   {% endif %}
 </div>
 
