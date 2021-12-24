@@ -24,6 +24,10 @@ main {
   color: #ff385c;
 }
 
+.navbar-brand:hover {
+  text-decoration: none;
+}
+
 ul {
   margin: 0;
   padding: 0;
