@@ -352,6 +352,11 @@ hr {
   background-color: #e62020;
 }
 
+.button-finished {
+  display: none;
+  width: 190px;
+}
+
 .form-group {
   display: flex;
   flex-direction: column;

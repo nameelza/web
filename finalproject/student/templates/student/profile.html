@@ -107,8 +107,9 @@
             <div>{{booker.message}}</div>
         </div>
         <div class="booker-button">
-            <button id="Confirmed">Accept</button>
-            <button id="Declined">Decline</button>
+            <button id="Confirmed" data-id="{{booker.id}}">Accept</button>
+            <button id="Declined" data-id="{{booker.id}}">Decline</button>
+            <button class="button-finished" data-id="{{booker.id}}"></button>
         </div>
     </div>
     {% endif %}

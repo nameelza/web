@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const editContent = document.getElementById('edit');
     const acceptButton = document.querySelectorAll('#Confirmed')
     const declineButton = document.querySelectorAll('#Declined')
+    const buttonFinished = document.querySelectorAll('.button-finished')
     enquiryButton.addEventListener('click', () => {
         // Show content
         enquiryContent.style.display = 'block';
@@ -38,11 +39,19 @@ document.addEventListener('DOMContentLoaded', function () {
         propertyButton.style.color = '#8b8b8b';
         editButton.style.color = '#000';
     });
+
     acceptButton.forEach(accept => {
         accept.addEventListener('click', () => {
-        console.log('accepted')
-        })
+        const booking_id = accept.getAttribute("data-id");   
+        fetch ("/accept", {
+            method: "POST",
+            body: JSON.stringify({
+                booking_id: booking_id
+            }),
+        });
+        });
     });
+
     declineButton.forEach(decline => {
         decline.addEventListener('click', () => {
         console.log('declined')
