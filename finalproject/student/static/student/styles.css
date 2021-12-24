@@ -352,8 +352,12 @@ hr {
   background-color: #e62020;
 }
 
-.button-finished {
+#button-finished {
   display: none;
+  width: 190px;
+}
+
+.button-finished {
   width: 190px;
 }
 

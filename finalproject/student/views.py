@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import csrf_exempt
 from django.db import IntegrityError
 from .models import *
+import json
 
 
 def index(request):
@@ -167,9 +168,21 @@ def register(request):
     else:
         return render(request, "student/register.html")
 
-def accept(request, booking_id):
+@csrf_exempt
+def accept(request):
+    data = json.loads(request.body)
+    booking_id = data["booking_id"]
     booking = Booking.objects.get(id=booking_id)
-    booking.status = "Accepted"
+    booking.status = "Confirmed"
+    booking.save()
+    return HttpResponseRedirect(reverse("profile"))
+
+@csrf_exempt
+def decline(request):
+    data = json.loads(request.body)
+    booking_id = data["booking_id"]
+    booking = Booking.objects.get(id=booking_id)
+    booking.status = "Declined"
     booking.save()
     return HttpResponseRedirect(reverse("profile"))
 

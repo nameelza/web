@@ -107,9 +107,13 @@
             <div>{{booker.message}}</div>
         </div>
         <div class="booker-button">
-            <button id="Confirmed" data-id="{{booker.id}}">Accept</button>
-            <button id="Declined" data-id="{{booker.id}}">Decline</button>
-            <button class="button-finished" data-id="{{booker.id}}"></button>
+            {% if booker.status == 'Pending' %}
+            <button id="Confirmed" data-id="{{booker.id}}" class="Confirmed-{{booker.id}}">Accept</button>
+            <button id="Declined" data-id="{{booker.id}}" class="Declined-{{booker.id}}">Decline</button>
+            <button id="button-finished" data-id="{{booker.id}}" class="Finished-{{booker.id}}"></button>
+            {% else %}
+            <button id="{{booker.status}}" class="button-finished">{{booker.status}}</button>
+            {% endif %}
         </div>
     </div>
     {% endif %}
