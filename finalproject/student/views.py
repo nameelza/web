@@ -166,3 +166,10 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "student/register.html")
+
+def accept(request, booking_id):
+    booking = Booking.objects.get(id=booking_id)
+    booking.status = "Accepted"
+    booking.save()
+    return HttpResponseRedirect(reverse("profile"))
+

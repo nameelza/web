@@ -454,7 +454,7 @@ hr {
   align-self: center;
 }
 
-.booker-button a:last-child {
+.booker-button button:last-child {
   margin-left: 10px;
 }
 

@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const enquiryContent = document.getElementById('enquiries');
     const propertyContent = document.getElementById('properties');
     const editContent = document.getElementById('edit');
+    const acceptButton = document.querySelectorAll('#Confirmed')
+    const declineButton = document.querySelectorAll('#Declined')
     enquiryButton.addEventListener('click', () => {
         // Show content
         enquiryContent.style.display = 'block';
@@ -35,5 +37,15 @@ document.addEventListener('DOMContentLoaded', function () {
         enquiryButton.style.color = '#8b8b8b';
         propertyButton.style.color = '#8b8b8b';
         editButton.style.color = '#000';
+    });
+    acceptButton.forEach(accept => {
+        accept.addEventListener('click', () => {
+        console.log('accepted')
+        })
+    });
+    declineButton.forEach(decline => {
+        decline.addEventListener('click', () => {
+        console.log('declined')
+        })
     });
 });
