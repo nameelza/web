@@ -12,5 +12,6 @@ urlpatterns = [
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
     path("accept", views.accept, name="accept"),
-    path("decline", views.decline, name="decline")
+    path("decline", views.decline, name="decline"),
+    path("profile_edit", views.profile_edit, name="profile_edit")
 ]

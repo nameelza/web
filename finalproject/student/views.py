@@ -200,3 +200,29 @@ def decline(request):
     booking.save()
     return HttpResponseRedirect(reverse("profile"))
 
+@csrf_exempt
+def profile_edit(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == "POST":
+            data = json.loads(request.body)
+            action = data["action"]
+            if action == "first_name":
+                first_name = data["first_name"]
+                user.first_name = first_name
+                user.save()
+                print(action, first_name)
+            elif action == "last_name":
+                last_name = data["last_name"]
+                user.last_name = last_name
+                user.save()
+                print(action, last_name)
+            elif action == "email":
+                email = data["email"]
+                user.email = email
+                user.save()
+                print(action, email)
+            return HttpResponseRedirect(reverse("profile"))
+    else:
+        return HttpResponseRedirect(reverse("login_view"))
+            

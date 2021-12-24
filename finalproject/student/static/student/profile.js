@@ -8,7 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const editContent = document.getElementById('edit');
     const acceptButton = document.querySelectorAll('#Confirmed')
     const declineButton = document.querySelectorAll('#Declined')
-    const buttonFinished = document.querySelectorAll('.button-finished')
+    const firstNameButton = document.querySelector('#first-change')
+    const lastNameButton = document.querySelector('#last-change')
+    const emailButton = document.querySelector('#email-change')
     enquiryButton.addEventListener('click', () => {
         // Show content
         enquiryContent.style.display = 'block';
@@ -76,5 +78,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 }),
             });
         });
+    });
+
+    firstNameButton.addEventListener('click', (event) => {
+        first_name = document.querySelector('#first_name').value;
+        console.log(first_name);
+        fetch ("/profile_edit", {
+            method: "POST",
+            body: JSON.stringify({
+                action: 'first_name',
+                first_name
+            }),
+        });
+        event.preventDefault();
+    });
+
+    lastNameButton.addEventListener('click', (event) => {
+        last_name = document.querySelector('#last_name').value;
+        console.log(last_name);
+        fetch ("/profile_edit", {
+            method: "POST",
+            body: JSON.stringify({
+                action: 'last_name',
+                last_name
+            }),
+        });
+        event.preventDefault();
+    });
+    
+    emailButton.addEventListener('click', (event) => {
+        email = document.querySelector('#email').value;
+        console.log(email);
+        fetch ("/profile_edit", {
+            method: "POST",
+            body: JSON.stringify({
+                action: 'email',
+                email
+            }),
+        });
+        event.preventDefault();
     });
 });

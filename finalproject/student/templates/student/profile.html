@@ -128,26 +128,26 @@
 
 <div class="edit-content" id="edit">
     <hr>
-    <form class="profile-change">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <div class="input-group">
+            <input type="text" name="username" id="username" value="{{user.username}}" disabled>
+        </div>
+    </div>
+
+    <form class="profile-change" >
+        {% csrf_token %}
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="first_name">First name</label>
             <div class="input-group">
-                <input type="text" name="username" id="username" value="{{user.username}}" disabled>
+                <input type="text" name="first_name" id="first_name" value="{{user.first_name}}">
+                <input type="submit" class="change-button" value="Save" id="first-change"></input>
             </div>
         </div>
     </form>
-
-    <form class="profile-change">
-    <div class="form-group">
-        <label for="first_name">First name</label>
-        <div class="input-group">
-            <input type="text" name="first_name" id="first_name" value="{{user.first_name}}">
-            <input type="submit" class="change-button" value="Save" id="first-change"></input>
-        </div>
-    </div>
-    </form>
     
-    <form class="profile-change">
+    <form class="profile-change" >
+        {% csrf_token %}
         <div class="form-group">
             <label for="last_name">Last name</label>
             <div class="input-group">
@@ -157,7 +157,8 @@
         </div>
     </form>
 
-    <form class="profile-change">
+    <form class="profile-change" >
+        {% csrf_token %}
         <div class="form-group">
             <label for="email">Email</label>
             <div class="input-group">
