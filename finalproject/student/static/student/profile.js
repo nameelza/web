@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 first_name
             }),
         });
+        const message = document.querySelector('#success-first');
+        message.style.display = 'block';
         event.preventDefault();
     });
 
@@ -103,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 last_name
             }),
         });
+        const message = document.querySelector('#success-last');
+        message.style.display = 'block';
         event.preventDefault();
     });
     
@@ -116,6 +120,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 email
             }),
         });
+        const message = document.querySelector('#success-email');
+        message.style.display = 'block';
         event.preventDefault();
     });
 });

@@ -189,6 +189,7 @@ def accept(request):
     booking.save()
     property = Property.objects.get(id=booking.property.id)
     property.available = False
+    property.save()
     return HttpResponseRedirect(reverse("profile"))
 
 @csrf_exempt
