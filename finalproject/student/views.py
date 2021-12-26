@@ -11,7 +11,15 @@ import json
 
 
 def index(request):
-    return render(request, 'student/index.html')
+    cities = []
+    for property in Property.objects.all():
+        if property.get_city_display() in cities:
+            continue
+        else:
+            cities.append(property.get_city_display())
+    return render(request, 'student/index.html', {
+        'cities': cities
+    })
 
 
 def list_results(request):
@@ -212,17 +220,14 @@ def profile_edit(request):
                 first_name = data["first_name"]
                 user.first_name = first_name
                 user.save()
-                print(action, first_name)
             elif action == "last_name":
                 last_name = data["last_name"]
                 user.last_name = last_name
                 user.save()
-                print(action, last_name)
             elif action == "email":
                 email = data["email"]
                 user.email = email
                 user.save()
-                print(action, email)
             return HttpResponseRedirect(reverse("profile"))
     else:
         return HttpResponseRedirect(reverse("login_view"))
