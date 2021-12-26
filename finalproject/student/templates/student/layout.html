@@ -7,11 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- This sets the width of the page to follow the screen-width of the device and zoom out to fit -->
     <link href="{% static 'student/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'student/responsive.css' %}" rel="stylesheet" />
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
     <nav class="navbar">
-      <a href="{% url 'index' %}" class="navbar-brand"><div class="navbar-brand">Bay Area Student Rentals</div></a>
+      <a href="{% url 'index' %}" class="navbar-brand"
+        ><div class="navbar-brand">Bay Area Student Rentals</div></a
+      >
       <ul class="navbar-list">
         <li>
           <a href="{% url 'index' %}">Home</a>

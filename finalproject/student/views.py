@@ -12,7 +12,7 @@ import json
 
 def index(request):
     cities = []
-    for property in Property.objects.all():
+    for property in Property.objects.filter(available=True):
         if property.get_city_display() in cities:
             continue
         else:
@@ -23,17 +23,26 @@ def index(request):
 
 
 def list_results(request):
-    properties = Property.objects.filter(available = True)
+    city = request.GET.get('city_search')
+    if city:
+        properties = []
+        for property in Property.objects.filter(available=True):
+            if property.get_city_display() == city:
+                properties.append(property)
+        message = f"{city} Rentals"
+    else:
+        properties = Property.objects.filter(available=True)
+        message = "All Bay Area Rentals"
     amenities = Amenities.objects.all()
-    message = "All Bay Area Rentals"
     return render(request, 'student/results.html', {
         'properties': properties,
         'amenities': amenities,
         'message': message
     })
 
+
 def list_booked(request):
-    properties = Property.objects.filter(available = False)
+    properties = Property.objects.filter(available=False)
     amenities = Amenities.objects.all()
     message = "Booked Properties"
     return render(request, 'student/results.html', {
@@ -41,6 +50,7 @@ def list_booked(request):
         'amenities': amenities,
         'message': message
     })
+
 
 @login_required
 def rental(request, property_id):
@@ -51,7 +61,8 @@ def rental(request, property_id):
             phone = request.POST['phonenumber']
             message = request.POST['message']
             if len(Booking.objects.filter(property=property, user=user)) == 0:
-                new_enquiry = Booking(user=user, property=property, phone=phone, message=message)
+                new_enquiry = Booking(
+                    user=user, property=property, phone=phone, message=message)
                 new_enquiry.save()
             else:
                 Error("You have already made an enquiry for this property")
@@ -71,6 +82,7 @@ def rental(request, property_id):
     else:
         return HttpResponseRedirect(reverse("login_view"))
 
+
 @login_required
 def profile(request):
     user = request.user
@@ -89,6 +101,7 @@ def profile(request):
     else:
         HttpResponseRedirect(reverse("login_view"))
 
+
 @login_required
 def create(request):
     user = request.user
@@ -105,7 +118,8 @@ def create(request):
             image2 = request.POST['image2']
             image3 = request.POST['image3']
             image4 = request.POST['image4']
-            new_property = Property(user=user, title=title, description=description, price=price, city=city, address=address, place=place, image1=image1, image2=image2, image3=image3, image4=image4)
+            new_property = Property(user=user, title=title, description=description, price=price, city=city,
+                                    address=address, place=place, image1=image1, image2=image2, image3=image3, image4=image4)
             new_property.save()
             wifi = request.POST.get('wifi', False)
             kitchen = request.POST.get('kitchen', False)
@@ -119,7 +133,8 @@ def create(request):
             electricity = request.POST.get('electricity', False)
             gas = request.POST.get('gas', False)
             heating = request.POST.get('heating', False)
-            amenities = Amenities(property=new_property, wifi=wifi=='wifi', kitchen=kitchen=='kitchen', washer=washer=='washer', bike=bike=='bike', parking=parking=='parking', cctv=cctv=='cctv', gate=gate=='gate', wifi_bill=wifi_bill=='wifi-bill', water_bill=water=='water', electricity_bill=electricity=='electricity', gas_bill=gas=='gas', heating_bill=heating=='heating')
+            amenities = Amenities(property=new_property, wifi=wifi == 'wifi', kitchen=kitchen == 'kitchen', washer=washer == 'washer', bike=bike == 'bike', parking=parking == 'parking', cctv=cctv == 'cctv',
+                                  gate=gate == 'gate', wifi_bill=wifi_bill == 'wifi-bill', water_bill=water == 'water', electricity_bill=electricity == 'electricity', gas_bill=gas == 'gas', heating_bill=heating == 'heating')
             amenities.save()
             return render(request, 'student/create.html', {
                 'message': 'Property created!'
@@ -177,7 +192,8 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username = username, first_name = firstname, last_name = lastname, email = email, password = password)
+            user = User.objects.create_user(
+                username=username, first_name=firstname, last_name=lastname, email=email, password=password)
             user.save()
         except IntegrityError:
             return render(request, "student/register.html", {
@@ -187,6 +203,7 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "student/register.html")
+
 
 @csrf_exempt
 def accept(request):
@@ -200,6 +217,7 @@ def accept(request):
     property.save()
     return HttpResponseRedirect(reverse("profile"))
 
+
 @csrf_exempt
 def decline(request):
     data = json.loads(request.body)
@@ -208,6 +226,7 @@ def decline(request):
     booking.status = "Declined"
     booking.save()
     return HttpResponseRedirect(reverse("profile"))
+
 
 @csrf_exempt
 def profile_edit(request):
@@ -231,4 +250,3 @@ def profile_edit(request):
             return HttpResponseRedirect(reverse("profile"))
     else:
         return HttpResponseRedirect(reverse("login_view"))
-            

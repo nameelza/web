@@ -1,96 +1,164 @@
-{% extends "student/layout.html" %} 
-
-{% block title %} Become a host {%endblock%}
-
+{% extends "student/layout.html" %} {% block title %} Become a host {%endblock%}
 {% block body %}
-<div class="results-heading">
-    Add your property
-</div>
-<hr>
+<div class="results-heading">Add your property</div>
+<hr />
 {% if message %}
-    <div class="alert-success">{{ message }}</div>
+<div class="success-create">{{ message }}</div>
 {% endif %}
 <form action="{% url 'create' %}" method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-        <input type="text" name="title" placeholder="Title" class="form-control"  id="title" required />
+  {% csrf_token %}
+  <div class="form-group">
+    <input
+      type="text"
+      name="title"
+      placeholder="Title"
+      class="form-control"
+      id="title"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <textarea
+      name="description"
+      placeholder="Description/Property details"
+      class="form-control"
+      id="description"
+      required
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <div class="form-price">
+      <span>$</span>
+      <input
+        type="number"
+        name="price"
+        placeholder="Price"
+        class="form-control"
+        id="form-price"
+        min="0"
+        step="1"
+        required
+      />
+      <span>/ month</span>
     </div>
-    <div class="form-group">
-        <textarea name="description" placeholder="Description/Property details" class="form-control" id="description" required></textarea>
-    </div>
-    <div class="form-group">
-        <div class="form-price">
-            <span>$</span>
-            <input type="number" name="price" placeholder="Price" class="form-control" id="form-price" min="0" step="1" required/>
-            <span>/ month</span>
-        </div>
-    </div>
-    <div class="form-group">
-        <select class="form-control" name="city_category" name="city" id="city_category" required>
-            <option value="" disabled selected>City</option>
-            {% for category in city_category %}
-                <option value="{{category.0}}">{{category.1}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group">
-        <input type="text" name="form-address" placeholder="Address" class="form-control" id="form-address" required/>
-    </div>
-    <div class="form-group">
-        <select class="form-control" name="place_category" id="place_category" required>
-            <option value="" disabled selected>Select Category</option>
-            {% for category in place_category %}
-                <option value="{{category.0}}">{{category.1}}</option>
-            {% endfor %}
-        </select>
-    </div>
-    <label for="form-select" class="form-label">Choose amenitites</label>
-    <div class="form-select">
-        <input type="checkbox" id="wifi" name="wifi" value="wifi">
-        <label for="wifi"> Wifi</label><br>
-        <input type="checkbox" id="kitchen" name="kitchen" value="kitchen">
-        <label for="kitchen"> Kitchen</label><br>
-        <input type="checkbox" id="washer" name="washer" value="washer">
-        <label for="washer">Washer</label><br>
-        <input type="checkbox" id="gym" name="gym" value="gym">
-        <label for="gym">Gym</label><br>
-        <input type="checkbox" id="bike" name="bike" value="bike">
-        <label for="bike">Bike storage</label><br>
-        <input type="checkbox" id="parking" name="parking" value="parking">
-        <label for="bike">Parking</label><br>
-    </div>
-    <label for="form-select" class="form-label">Choose security&safety</label>
-    <div class="form-select">
-        <input type="checkbox" id="cctv" name="cctv" value="cctv">
-        <label for="cctv">CCTV / Surveillance Cameras</label><br>
-        <input type="checkbox" id="gate" name="gate" value="gate">
-        <label for="gate">Controlled Access Gate</label><br>
-    </div>
-    <label for="form-select" class="form-label">Choose covered bills</label>
-    <div class="form-select">
-        <input type="checkbox" id="wifi-bill" name="wifi-bill" value="wifi-bill">
-        <label for="wifi-bill">Wifi</label><br>
-        <input type="checkbox" id="water" name="water" value="water">
-        <label for="water">Water</label><br>
-        <input type="checkbox" id="gas" name="gas" value="gas">
-        <label for="gas">Gas</label><br>
-        <input type="checkbox" id="electricity" name="electricity" value="electricity">
-        <label for="electricity">Electricity</label><br>
-        <input type="checkbox" id="heating" name="heating" value="heating">
-        <label for="heating">Heating</label><br>
-    </div>
-    <div class="form-group">
-        <input type="text" name="image1" placeholder="Fisrt Image URL" class="form-control w-25" id="image" required/>
-    </div>
-    <div class="form-group">
-        <input type="text" name="image2" placeholder="Second Image URL" class="form-control w-25" id="image" required/>
-    </div>
-    <div class="form-group">
-        <input type="text" name="image3" placeholder="Third Image URL" class="form-control w-25" id="image" required/>
-    </div>
-    <div class="form-group">
-        <input type="text" name="image4" placeholder="Last Image URL" class="form-control w-25" id="image" required/>
-    </div>
-    <button type="submit">Create</button>
+  </div>
+  <div class="form-group">
+    <select
+      class="form-control"
+      name="city_category"
+      name="city"
+      id="city_category"
+      required
+    >
+      <option value="" disabled selected>City</option>
+      {% for category in city_category %}
+      <option value="{{category.0}}">{{category.1}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="form-address"
+      placeholder="Address"
+      class="form-control"
+      id="form-address"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <select
+      class="form-control"
+      name="place_category"
+      id="place_category"
+      required
+    >
+      <option value="" disabled selected>Select Category</option>
+      {% for category in place_category %}
+      <option value="{{category.0}}">{{category.1}}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <label for="form-select" class="form-label">Choose amenitites</label>
+  <div class="form-select">
+    <input type="checkbox" id="wifi" name="wifi" value="wifi" />
+    <label for="wifi"> Wifi</label><br />
+    <input type="checkbox" id="kitchen" name="kitchen" value="kitchen" />
+    <label for="kitchen"> Kitchen</label><br />
+    <input type="checkbox" id="washer" name="washer" value="washer" />
+    <label for="washer">Washer</label><br />
+    <input type="checkbox" id="gym" name="gym" value="gym" />
+    <label for="gym">Gym</label><br />
+    <input type="checkbox" id="bike" name="bike" value="bike" />
+    <label for="bike">Bike storage</label><br />
+    <input type="checkbox" id="parking" name="parking" value="parking" />
+    <label for="bike">Parking</label><br />
+  </div>
+  <label for="form-select" class="form-label">Choose security&safety</label>
+  <div class="form-select">
+    <input type="checkbox" id="cctv" name="cctv" value="cctv" />
+    <label for="cctv">CCTV / Surveillance Cameras</label><br />
+    <input type="checkbox" id="gate" name="gate" value="gate" />
+    <label for="gate">Controlled Access Gate</label><br />
+  </div>
+  <label for="form-select" class="form-label">Choose covered bills</label>
+  <div class="form-select">
+    <input type="checkbox" id="wifi-bill" name="wifi-bill" value="wifi-bill" />
+    <label for="wifi-bill">Wifi</label><br />
+    <input type="checkbox" id="water" name="water" value="water" />
+    <label for="water">Water</label><br />
+    <input type="checkbox" id="gas" name="gas" value="gas" />
+    <label for="gas">Gas</label><br />
+    <input
+      type="checkbox"
+      id="electricity"
+      name="electricity"
+      value="electricity"
+    />
+    <label for="electricity">Electricity</label><br />
+    <input type="checkbox" id="heating" name="heating" value="heating" />
+    <label for="heating">Heating</label><br />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="image1"
+      placeholder="Fisrt Image URL"
+      class="form-control w-25"
+      id="image"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="image2"
+      placeholder="Second Image URL"
+      class="form-control w-25"
+      id="image"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="image3"
+      placeholder="Third Image URL"
+      class="form-control w-25"
+      id="image"
+      required
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      name="image4"
+      placeholder="Last Image URL"
+      class="form-control w-25"
+      id="image"
+      required
+    />
+  </div>
+  <button type="submit">Create</button>
 </form>
 {% endblock %}

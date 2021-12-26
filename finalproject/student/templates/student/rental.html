@@ -1,7 +1,9 @@
 {% extends "student/layout.html" %} {% block title %} Queen room with shared
 bathroom {%endblock%} {% block body %}
 <div class="results-heading">{{property.title}}</div>
-<div class="small">{{property.get_place_display}} • {{property.get_city_display}}</div>
+<div class="small">
+  {{property.get_place_display}} • {{property.get_city_display}}
+</div>
 <div class="image-gallery">
   <div class="image-container">
     <img
@@ -12,32 +14,16 @@ bathroom {%endblock%} {% block body %}
   </div>
   <div class="images-column">
     <div class="image-single">
-      <img
-        src="{{property.image1}}"
-        alt="{{property.title}}"
-        id="smallImage"
-      />
+      <img src="{{property.image1}}" alt="{{property.title}}" id="smallImage" />
     </div>
     <div class="image-single">
-      <img
-        src="{{property.image2}}"
-        alt="{{property.title}}"
-        id="smallImage"
-      />
+      <img src="{{property.image2}}" alt="{{property.title}}" id="smallImage" />
     </div>
     <div class="image-single">
-      <img
-        src="{{property.image3}}"
-        alt="{{property.title}}"
-        id="smallImage"
-      />
+      <img src="{{property.image3}}" alt="{{property.title}}" id="smallImage" />
     </div>
     <div class="image-single">
-      <img
-        src="{{property.image4}}"
-        alt="{{property.title}}"
-        id="smallImage"
-      />
+      <img src="{{property.image4}}" alt="{{property.title}}" id="smallImage" />
     </div>
   </div>
 </div>
@@ -52,17 +38,13 @@ bathroom {%endblock%} {% block body %}
     <ul class="amenities">
       {% if amenities.wifi == True %}
       <li class="small">Wifi</li>
-      {% endif %}
-      {% if amenities.kitchen == True %}
+      {% endif %} {% if amenities.kitchen == True %}
       <li class="small">Kitchen</li>
-      {% endif %}
-      {% if amenities.washer == True %}
+      {% endif %} {% if amenities.washer == True %}
       <li class="small">Washer</li>
-      {% endif %}
-      {% if amenities.bike == True %}
+      {% endif %} {% if amenities.bike == True %}
       <li class="small">Bike storage</li>
-      {% endif %}
-      {% if amenities.parking == True %}
+      {% endif %} {% if amenities.parking == True %}
       <li class="small">Parking</li>
       {% endif %}
     </ul>
@@ -79,8 +61,7 @@ bathroom {%endblock%} {% block body %}
         <li class="small">CCTV / Surveillance Cameras</li>
       </ul>
     </div>
-    {% endif %}
-    {% if amenities.gate == True %}
+    {% endif %} {% if amenities.gate == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">Controlled Access Gate</li>
@@ -106,8 +87,7 @@ bathroom {%endblock%} {% block body %}
         <li class="small">Wifi</li>
       </ul>
     </div>
-    {% endif %}
-    {% if amenities.water_bill == True %}
+    {% endif %} {% if amenities.water_bill == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">Water</li>
@@ -119,8 +99,7 @@ bathroom {%endblock%} {% block body %}
         <li class="small">Water</li>
       </ul>
     </div>
-    {% endif %}
-    {% if amenities.electricity_bill == True %}
+    {% endif %} {% if amenities.electricity_bill == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">Electricity</li>
@@ -132,8 +111,7 @@ bathroom {%endblock%} {% block body %}
         <li class="small">Electricity</li>
       </ul>
     </div>
-    {% endif %}
-    {% if amenities.gas_bill == True %}
+    {% endif %} {% if amenities.gas_bill == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">Gas</li>
@@ -145,8 +123,7 @@ bathroom {%endblock%} {% block body %}
         <li class="small">Gas</li>
       </ul>
     </div>
-    {% endif %}
-    {% if amenities.heating_bill == True %}
+    {% endif %} {% if amenities.heating_bill == True %}
     <div id="included">
       <ul class="amenities">
         <li class="small">Heating</li>
@@ -160,8 +137,7 @@ bathroom {%endblock%} {% block body %}
     </div>
     {% endif %}
   </div>
-  {% if property.user != user %}
-  {% if property.available == True %}
+  {% if property.user != user %} {% if property.available == True %}
   <div class="rental-book">
     <div class="price">
       <span id="price">${{property.price}}</span>
@@ -171,7 +147,7 @@ bathroom {%endblock%} {% block body %}
       <form action="{% url 'rental' property.id %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
-          <label for="name" >First name</label>
+          <label for="name">First name</label>
           <input
             type="text"
             class="form-control"
@@ -228,9 +204,18 @@ bathroom {%endblock%} {% block body %}
             rows="3"
             placeholder="Enter message"
             disabled
-          >{{booking.0.message}}</textarea>
+          >
+{{booking.0.message}}</textarea
+          >
         </div>
-        <button type="submit" class="button-rental" id="{{booking.0.status}}" disabled>Enquiry status: {{booking.0.status}}</button>
+        <button
+          type="submit"
+          class="button-rental"
+          id="{{booking.0.status}}"
+          disabled
+        >
+          Enquiry status: {{booking.0.status}}
+        </button>
         {% else %}
         <div class="form-group">
           <label for="phone">Phone number</label>
@@ -252,13 +237,12 @@ bathroom {%endblock%} {% block body %}
             placeholder="Enter message"
           ></textarea>
         </div>
-        <button type="submit" class="button-rental" >Make enquiry</button>
+        <button type="submit" class="button-rental">Make enquiry</button>
         {% endif %}
       </form>
     </div>
   </div>
-  {% endif %}
-  {% endif %}
+  {% endif %} {% endif %}
 </div>
 
 <script src="/static/student/image.js"></script>

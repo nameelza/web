@@ -1,28 +1,32 @@
-{% extends "student/layout.html" %} 
-
-{% block title %} Student Rentals {%endblock%}
-
-{% block body %}
+{% extends "student/layout.html" %} {% block title %} Student Rentals
+{%endblock%} {% block body %}
 <div class="index-content">
-    Find a perfect place for your college experience
+  Find a perfect place for your college experience
 </div>
 
-<form class="search" method="POST" action="{% url 'list_results' %}">
-    {% csrf_token %}
-    <select type="search" placeholder="Search by city" name="city-search">
-        <option value="" disabled selected>Search by city</option>
-        {% for city in cities %}
-            <option value="{{city}}">{{city}}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Search</button>
+<form class="search" method="GET" action="{% url 'list_results' %}">
+  {% csrf_token %}
+  <select
+    type="search"
+    placeholder="Search by city"
+    name="city_search"
+    required
+  >
+    <option value="" disabled selected>Search by city</option>
+    {% for city in cities %}
+    <option value="{{city}}">{{city}}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Search</button>
 </form>
 <div class="explore-all">
-    <div class="explore-or">OR</div>
-    <a class="explore-all-button" href="{% url 'list_results' %}" >Explore all</a>
+  <div class="explore-or">OR</div>
+  <a class="explore-all-button" href="{% url 'list_results' %}">Explore all</a>
 </div>
 
 <footer>
-    <div class="small">Rent a place for your 2022-2023 college year in San Francisco&Bay Area</div>
+  <div class="small">
+    Rent a place for your 2022-2023 college year in San Francisco&Bay Area
+  </div>
 </footer>
 {% endblock %}

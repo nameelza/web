@@ -1,50 +1,45 @@
-{% extends "student/layout.html" %} 
-
-{% block title %} Rentals San Francisco {%endblock%}
-
-{% block body %}
-<div class="results-heading">
-    {{message}}
-</div>
+{% extends "student/layout.html" %} {% block title %} Rentals San Francisco
+{%endblock%} {% block body %}
+<div class="results-heading">{{message}}</div>
 <div class="results-list">
-    {% for property in properties %}
-    <hr>
-    <a href="{% url 'rental' property.id %}" class="result">
-        <div class="result-image">
-            <img src="{{property.image1}}" alt="image of the property">
-        </div>
-        <div class="result-content">
-            <div class="small">{{property.get_place_display}}</div>
-            <div class="big">{{property.get_city_display}} • {{property.title}}</div>
-            <hr class="hr-result">
-            <ul class="amenities">
-                {% for amenity in amenities %}
-                {% if amenity.property == property %}
-                {% if amenity.wifi == True %}
-                <li class="small">Wifi</li>
-                {% endif %}
-                {% if amenity.washer == True %}
-                <li class="small">Washer</li>
-                {% endif %}
-                {% if amenity.kitchen == True %}
-                <li class="small">Kitchen</li>
-                {% endif %}
-                {% if amenity.bike == True %}
-                <li class="small">Bike Storage</li>
-                {% endif %}
-                {% if amenity.parking == True %}
-                <li class="small">Parking</li>
-                {% endif %}
-                {% endif %}
-                {% endfor %}
-            </ul>
-            <div class="price">
-                <span id="price">${{property.price}}</span>
-                <span>/ month</span>
-            </div>
-        </div>
-    </a>
-    {% endfor %}
+  {% for property in properties %}
+  <hr />
+  <a href="{% url 'rental' property.id %}" class="result">
+    <div class="result-image">
+      <img src="{{property.image1}}" alt="image of the property" />
+    </div>
+    <div class="result-content">
+      <div class="small">{{property.get_place_display}}</div>
+      <div class="big">{{property.get_city_display}} • {{property.title}}</div>
+      <hr class="hr-result" />
+      <ul class="amenities">
+        {% for amenity in amenities %}
+        {% if amenity.property == property %}
+        {%if amenity.wifi == True %}
+        <li class="small">Wifi</li>
+        {% endif %}
+        {% if amenity.washer == True %}
+        <li class="small">Washer</li>
+        {% endif %}
+        {% if amenity.kitchen == True %}
+        <li class="small">Kitchen</li>
+        {% endif %}
+        {% if amenity.bike == True %}
+        <li class="small">Bike Storage</li>
+        {% endif %}
+        {% if amenity.parking == True %}
+        <li class="small">Parking</li>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <div class="price">
+        <span id="price">${{property.price}}</span>
+        <span>/ month</span>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
 </div>
 
 {% endblock %}

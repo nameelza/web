@@ -2,15 +2,20 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Create your models here.
+
+
 class User(AbstractUser):
     pass
+
 
 def __str__(self):
     return self.username
 
+
 class Property(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, blank=False, null=False, default='')
+    title = models.CharField(
+        max_length=100, blank=False, null=False, default='')
     description = models.CharField(max_length=200, blank=False)
     price = models.IntegerField(blank=False)
     CITY_CHOICES = [
@@ -45,6 +50,10 @@ class Property(models.Model):
     image4 = models.TextField(blank=False)
     available = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.title
+
+
 class Amenities(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     wifi = models.BooleanField(default=False)
@@ -60,6 +69,10 @@ class Amenities(models.Model):
     gas_bill = models.IntegerField(default=False)
     heating_bill = models.IntegerField(default=False)
 
+    def __str__(self):
+        return self.property.title
+
+
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
@@ -67,4 +80,5 @@ class Booking(models.Model):
     phone = models.CharField(max_length=20, blank=False)
     message = models.CharField(max_length=200, blank=False)
 
-
+    def __str__(self):
+        return self.user.username
