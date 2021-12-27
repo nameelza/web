@@ -5,6 +5,9 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 ## Demo preview
 ![project demo gif](student.gif)
 
+## Video demo
+<link>
+
 ## Getting started
 To get started, you need to clone the repository.
 ```
@@ -49,18 +52,18 @@ The app is built on Django, using JavaScript and SQLite3. The database is stored
 The app is designed on the basis of the requirements of the project. It uses Django, including four models, on the backend and Javascript on the frontend. The app is also designed to be mobile responsive, using css media queries.
 
 ### Django views functions
-* `index`: the main page of the app
-* `list_results`: list the results of the search
-* `list_booked`: list the booked properties
-* `rental`: show the page of the rental and make an inquiry
-* `profile`: show the profile of the user
-* `create`: create a new property listing
-* `login_view`: login page
-* `logout_view`: logout request
-* `register`: register page
-* `accept`: accept an inquiry
-* `decline`: decline an inquiry
-* `profile_edit`: edit the profile of the user
+* `index`: get request renders the index page with the search form
+* `list_results`: get request renders the list of properties
+* `list_booked`: get request renders the list of only already booked properties
+* `rental`: get request renders the rental page, including prefilled first name, last name and  email in the inquiry form, post request sends the inquiry to the landlord
+* `profile`: get request renders the profile page, user inquiries and properties
+* `create`: get request renders the create property form, post request adds the property to the database
+* `login_view`: get request renders the login page, post request logs in the user
+* `logout_view`: logout request logs out the user
+* `register`: get request renders the register page, post request adds the user to the database
+* `accept`: post request accepts the inquiry, changes the database status of the inquiry to accepted
+* `decline`: post request declines the inquiry, changes the database status of the inquiry to declined
+* `profile_edit`: post request edits the user profile information, including first name, last name, and email
 
 ### Django models
 * User: AbstractUser model
@@ -104,4 +107,5 @@ The app is designed on the basis of the requirements of the project. It uses Dja
 * profile.html: profile page of the user, including the list of properties, the list of inquiries, and the edit profile page
 * rental.html: page of the rental and inquiry form
 * results.html: list of the results of the search
+
 
