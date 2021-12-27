@@ -9,14 +9,14 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 #### As a student:
 * Search for properties, based on location
 * See the location, amenitites and other details of the property
-* Make enquiries
-* See the status of your enquiries
+* Make inquiries
+* See the status of your inquiries
 * Edit your profile information
 #### As a landlord:
 * Post your own properties
 * Add amenities, security, and other features
-* See the enquiries made by students
-* Accept or decline enquiries
+* See the inquiries made by students
+* Accept or decline inquiries
 * Edit your profile information
 
 ## Technical details
