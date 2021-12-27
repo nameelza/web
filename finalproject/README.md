@@ -26,8 +26,18 @@ The app is built on Django, using JavaScript and SQLite3. The database is stored
 The app is designed on the basis of the requirements of the project. It uses Django, including four models, on the backend and Javascript on the frontend. The app is also designed to be mobile responsive.
 ### Django views functions
 * `index`: the main page of the app
-* `search`: search for properties
-* `property`: see the details of the property
+* `list_results`: list the results of the search
+* `list_booked`: list the booked properties
+* `rental`: show the page of the rental and make an inquiry
+* `profile`: show the profile of the user
+* `create`: create a new property listing
+* `login_view`: login page
+* `logout_view`: logout request
+* `register`: register page
+* `accept`: accept an inquiry
+* `decline`: decline an inquiry
+* `profile_edit`: edit the profile of the user
+
 
 ### Django Models
 * User: AbstractUser model
