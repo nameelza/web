@@ -15,6 +15,6 @@ As a landlord:
 - [x] Post your own properties
 - [x] Add amenities, security, and other features
 - [x] See the enquiries made by students
-- [x] Accept or decline enquiries
+- [x] Accept or decline enquiries.
 
 
