@@ -19,4 +19,8 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 * Accept or decline enquiries
 * Edit your profile information
 
+## Technical details
+The app is built on Django, using JavaScript and SQLite3. The database is stored in the local file system.
+
+
 
