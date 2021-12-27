@@ -24,8 +24,9 @@ The app is built on Django, using JavaScript and SQLite3. The database is stored
 
 ## Distinctiveness and Complexity
 The app is designed on the basis of the requirements of the project. It uses Django, including four models, on the backend and Javascript on the frontend. The app is also designed to be mobile responsive.
+### Django views functions
 
-### Models
+### Django Models
 * User: AbstractUser model
 * Property: Property model
     * Foreign key to the User model
