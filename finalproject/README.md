@@ -24,6 +24,7 @@ The app is built on Django, using JavaScript and SQLite3. The database is stored
 
 ## Distinctiveness and Complexity
 The app is designed on the basis of the requirements of the project. It uses Django, including four models, on the backend and Javascript on the frontend. The app is also designed to be mobile responsive.
+
 ### Django views functions
 * `index`: the main page of the app
 * `list_results`: list the results of the search
@@ -37,7 +38,6 @@ The app is designed on the basis of the requirements of the project. It uses Dja
 * `accept`: accept an inquiry
 * `decline`: decline an inquiry
 * `profile_edit`: edit the profile of the user
-
 
 ### Django Models
 * User: AbstractUser model
@@ -71,6 +71,17 @@ The app is designed on the basis of the requirements of the project. It uses Dja
     * Status (e.g. pending, accepted, or declined)
     * phone number
     * message
+
+### Django templates
+* layout.html: the main template
+* index.html: main page of the app
+* create.html: form for creating the property listing
+* login.html: login page
+* register.html: register page
+* profile.html: profile page of the user, including the list of properties, the list of inquiries, and the edit profile page
+* rental.html: page of the rental and inquiry form
+* results.html: list of the results of the search
+
 
 
 
