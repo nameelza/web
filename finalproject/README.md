@@ -34,7 +34,7 @@ The app is designed on the basis of the requirements of the project. It uses Dja
     * Price
     * City (based on choices field in the table)
     * Address
-    * Kind of place (based on choices field in the table, e.g. entire place, private room or shared room)
+    * Kind of place (based on choices field in the table, e.g. entire place, private room, or shared room)
     * Four image links
     * Availability (boolean value)
 * Amenities: Amenities model
@@ -54,7 +54,7 @@ The app is designed on the basis of the requirements of the project. It uses Dja
 * Booking: Booking model
     * Foreign key to the Property model
     * Foreign key to the User model
-    * Status (e.g. pending, accepted or declined)
+    * Status (e.g. pending, accepted, or declined)
     * phone number
     * message
 
