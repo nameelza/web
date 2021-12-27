@@ -5,6 +5,21 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 ## Demo preview
 ![project demo gif](student.gif)
 
+## Getting started
+To get started, you need to clone the repository.
+    $ git clone https://github.com/nameelza/web.git
+    $ cd finalproject
+
+Install the dependencies.
+    $ pip install -r requirements.txt
+
+Apply the migrations.
+    $ python manage.py makemigrations
+    $ python manage.py migrate
+
+You can now run the server.
+    $ python manage.py runserver
+
 ## Features
 #### As a student:
 * Search for properties, based on location
@@ -23,7 +38,7 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 The app is built on Django, using JavaScript and SQLite3. The database is stored in the local file system.
 
 ## Distinctiveness and Complexity
-The app is designed on the basis of the requirements of the project. It uses Django, including four models, on the backend and Javascript on the frontend. The app is also designed to be mobile responsive.
+The app is designed on the basis of the requirements of the project. It uses Django, including four models, on the backend and Javascript on the frontend. The app is also designed to be mobile responsive, using css media queries.
 
 ### Django views functions
 * `index`: the main page of the app
@@ -81,10 +96,4 @@ The app is designed on the basis of the requirements of the project. It uses Dja
 * profile.html: profile page of the user, including the list of properties, the list of inquiries, and the edit profile page
 * rental.html: page of the rental and inquiry form
 * results.html: list of the results of the search
-
-
-
-
-
-
 
