@@ -207,7 +207,10 @@
         flex-direction: row;
     }
     .images-column {
-    flex-direction: column;
+        flex-direction: column;
+    }
+    .image-container {
+        height: 630px;
     }
     .rental-content {
         flex-direction: row;

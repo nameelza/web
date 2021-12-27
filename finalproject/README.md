@@ -6,7 +6,7 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 ![project demo gif](student.gif)
 
 ## Video demo
-<link>
+<https://youtu.be/EsCZDF2oRe8>
 
 ## Getting started
 To get started, you need to clone the repository.
