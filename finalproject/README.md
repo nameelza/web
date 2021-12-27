@@ -39,7 +39,7 @@ The app is designed on the basis of the requirements of the project. It uses Dja
 * `decline`: decline an inquiry
 * `profile_edit`: edit the profile of the user
 
-### Django Models
+### Django models
 * User: AbstractUser model
 * Property: Property model
     * Foreign key to the User model
