@@ -7,18 +7,26 @@ The project is an AirBnB for students in Bay Area. The difference is that the re
 
 ## Getting started
 To get started, you need to clone the repository.
-    `$ git clone https://github.com/nameelza/web.git`
-    `$ cd finalproject`
+```
+$ git clone https://github.com/nameelza/web.git
+$ cd finalproject
+```
 
 Install the dependencies.
-    `$ pip install -r requirements.txt`
+```
+$ pip install -r requirements.txt
+```
 
 Apply the migrations.
-    `$ python manage.py makemigrations`
-    `$ python manage.py migrate`
+```
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
 
 You can now run the server.
-    `$ python manage.py runserver`
+```
+$ python manage.py runserver
+```
 
 ## Features
 #### As a student:
